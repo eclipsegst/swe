@@ -16,3 +16,19 @@ git@codeforge.cs.missouri.edu:swe-sp14gn.git
 The next step is to push you local branch to the remote repository by using,
  
 git push git@codeforge.cs.missouri.edu:swe-sp14gn.git zztg2
+
+
+===========================================================================
+But it will not change the remote master
+respository(https://codeforge.cs.missouri.edu/p/swe-sp14gn/source/tree/master/).
+If you want to change the remote master, what you need to do is,
+Step 1. switch to local master by using
+git checkout master
+
+Step 2. merge your own branch with master
+git merge zztg2
+
+Step 3. push local master to remote master
+git push
+===========================================================================
+Feel free to send me an email if you have any questions.-Zhaolong
