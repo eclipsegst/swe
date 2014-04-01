@@ -35,4 +35,6 @@ git merge zztg2
 Step 3. push local master to remote master
 git push
 ===========================================================================
+You can check the website here:
+http://babbage.cs.missouri.edu/~zztg2/swe-sp114gn/Source/
 Feel free to send me an email if you have any questions.-Zhaolong
