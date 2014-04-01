@@ -1,0 +1,18 @@
+How to create your own branch:
+
+For example my pawprint is zztg2, I'll use the comand line below to create a
+branch.(please use your own pawprint)
+
+git checkout -b zztg2
+This will create a local(in your own laptop) branch, you might want to push
+this branch to the remote repository.
+You can find remote name by,
+git remote
+git remote -v
+
+The remote name is,
+git@codeforge.cs.missouri.edu:swe-sp14gn.git
+
+The next step is to push you local branch to the remote repository by using,
+ 
+git push git@codeforge.cs.missouri.edu:swe-sp14gn.git zztg2
