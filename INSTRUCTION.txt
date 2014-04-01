@@ -17,6 +17,10 @@ The next step is to push you local branch to the remote repository by using,
  
 git push git@codeforge.cs.missouri.edu:swe-sp14gn.git zztg2
 
+You have to use the remote name only once. So you can use the line below to
+push your local branch to your remote branch.
+
+git push
 
 ===========================================================================
 But it will not change the remote master
