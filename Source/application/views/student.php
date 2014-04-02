@@ -65,11 +65,7 @@
           
           <?php echo $this->session->flashdata('feedback');?>
           <h1 class="page-header">New Anouncement</h1>
-<<<<<<< HEAD
           <h2 class="sub-header"><a href="../index.php/upload">Click me to check out an example of submission.</a></h2>
-=======
-          <h2 class="sub-header"><a href="./upload">Click me to check out an example of submission.</a></h2>
->>>>>>> zztg2
 
           </div>
         </div>
