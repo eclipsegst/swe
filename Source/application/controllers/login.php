@@ -28,9 +28,9 @@ class Login extends CI_Controller {
 		// $this->session->keep_flashdata('feedback');
 		$this->session->set_flashdata('feedback', 'You are successfully login!');
 		
-		// header("Location: ../student");
+		header("Location: ../student");
 
-		$this->load->view('student');
+		//$this->load->view('student');
 	}
 }
 
