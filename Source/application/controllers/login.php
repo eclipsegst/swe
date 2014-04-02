@@ -25,12 +25,21 @@ class Login extends CI_Controller {
 	function roleCheck()
 	{
 		$this->load->library('session');
+<<<<<<< HEAD
 		$this->session->keep_flashdata('feedback');
 		$this->session->set_flashdata('feedback', 'Success message for client to see');
 		
 		header("Location: ../student");
 
 		// $this->load->view('student');
+=======
+		// $this->session->keep_flashdata('feedback');
+		$this->session->set_flashdata('feedback', 'You are successfully login!');
+		
+		header("Location: ../student");
+
+		//$this->load->view('student');
+>>>>>>> zztg2
 	}
 }
 
