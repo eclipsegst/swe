@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Student extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,18 +19,9 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login');
-	}
-
-	function roleCheck()
-	{
 		$this->load->library('session');
 		$this->session->keep_flashdata('feedback');
-		$this->session->set_flashdata('feedback', 'Success message for client to see');
-		
-		header("Location: ../student");
-
-		// $this->load->view('student');
+		$this->load->view('student');
 	}
 }
 
