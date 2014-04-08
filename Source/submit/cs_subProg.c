@@ -39,7 +39,7 @@ int main(int argc,char **argv)
 	
 	
 	printf("Submission details:\n\n");
-	printf("File name: %s\nFile size: %d\nCourse: %s\nSection: %s\n"
+	printf("File name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
 	"Assignment: %s\n",filename,fSize,course,section,assign);
 	
 	return 0;
