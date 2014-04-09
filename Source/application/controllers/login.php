@@ -17,71 +17,77 @@ class Login extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function index($msg = NULL)
 	{
 		// $this->load->view('login');
-		$error = array(
-				'error' => '');
-		$this->load->view('login', $error);
+		$data['msg'] = $msg;
+		$this->load->view('login_view', $data);
 	}
 
-	function roleCheck()
+	function process()
 	{
 		$this->load->database();
 		$this->load->helper('url');// base_url is usded in view file
-
+		// $this->load->library('session');
+		$this->load->model('login_model');
+		$result = $this->login_model->validate();
+		if(!$result){
+			$msg = '<font color=red>Invalid username and/or password.</font><br />';
+			$this->index($msg);
+		}else{
+			redirect('student');
+		}
 		// $query = $this->db->query('SELECT name FROM Puppy');
 
 		
-		// $data = array(
-  //              'title' => 'My Title',
-  //              'heading' => 'My Heading',
-  //              'message' => 'My Message'
-  //         );
-		// $data['title'] = "My Real Title";
-		// $data['heading'] = "My Real Heading";
-		$name='Daisy';//id = 11
-		$id = '12';
-		if(isset($_POST['submit'])) {
+		// $name='Daisy';//id = 11
+		// $id = '12';
+		// if(isset($_POST['submit'])) {
 		
-			$username = $_POST['username'];
-			// $password = sha1($_POST['password']);// encryption
-			$password = $_POST['password'];
-			$name = $username;
-			$id = $password;
-		}
+		// 	$username = $_POST['username'];
+		// 	// $password = sha1($_POST['password']);// encryption
+		// 	$password = $_POST['password'];
+		// 	$name = $username;
+		// 	$id = $password;
+		// }
 
 		
 		
-		$query = $this->db->query('SELECT * FROM Puppy WHERE name='.'"'.$name.'"');
+		// $query = $this->db->query('SELECT * FROM Puppy WHERE name='.'"'.$name.'"');
 
-		if ($query->num_rows() > 0)
-		{
-		   	$row = $query->row();
+		// if ($query->num_rows() > 0)
+		// {
+		//    	$row = $query->row();
 		   	
-			if ($id == $row->id){
-				$message = array(
-					'message' => 'successful');
-				$this->load->view('student', $message);
-			}
-			else{
-				$error = array(
-					'error' => 'Login Failed. Incorrect Password!'.$id);
-				$this->load->view('login', $error);
-			}
-		}
-		else{
+		// 	if ($id == $row->id){
+		// 		$message = array(
+		// 			'message' => 'successful');
+		// 		$this->load->view('student', $message);
+		// 	}
+		// 	else{
+		// 		$error = array(
+		// 			'error' => 'Login Failed. Incorrect Password!'.$id);
+		// 		$this->load->view('login', $error);
+		// 	}
+		// }
+		// else{
 
-			// $data = array(
-			// 	'query' => $query);
-			$error = array(
-					'error' => $name);
-			$this->load->view('login', $error);
+		// 	// $data = array(
+		// 	// 	'query' => $query);
+		// 	$error = array(
+		// 			'error' => $name);
+		// 	$this->load->view('login', $error);
 
-			// $this->load->view('student',$query);
-			// header("Location: ../student");
-		}
+		// 	// $this->load->view('student',$query);
+		// 	// header("Location: ../student");
+		// }
+
 	}
+
+	public function do_logout(){
+        $this->session->sess_destroy();
+        redirect('login');
+    }
 }
 
 /* End of file welcome.php */
