@@ -19,18 +19,68 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login');
+		// $this->load->view('login');
+		$error = array(
+				'error' => '');
+		$this->load->view('login', $error);
 	}
 
 	function roleCheck()
 	{
-		$this->load->library('session');
-		$this->session->keep_flashdata('feedback');
-		$this->session->set_flashdata('feedback', 'Success message for client to see');
-		
-		header("Location: ../student");
+		$this->load->database();
+		$this->load->helper('url');// base_url is usded in view file
 
-		// $this->load->view('student');
+		// $query = $this->db->query('SELECT name FROM Puppy');
+
+		
+		// $data = array(
+  //              'title' => 'My Title',
+  //              'heading' => 'My Heading',
+  //              'message' => 'My Message'
+  //         );
+		// $data['title'] = "My Real Title";
+		// $data['heading'] = "My Real Heading";
+		$name='Daisy';//id = 11
+		$id = '12';
+		if(isset($_POST['submit'])) {
+		
+			$username = $_POST['username'];
+			// $password = sha1($_POST['password']);// encryption
+			$password = $_POST['password'];
+			$name = $username;
+			$id = $password;
+		}
+
+		
+		
+		$query = $this->db->query('SELECT * FROM Puppy WHERE name='.'"'.$name.'"');
+
+		if ($query->num_rows() > 0)
+		{
+		   	$row = $query->row();
+		   	
+			if ($id == $row->id){
+				$message = array(
+					'message' => 'successful');
+				$this->load->view('student', $message);
+			}
+			else{
+				$error = array(
+					'error' => 'Login Failed. Incorrect Password!'.$id);
+				$this->load->view('login', $error);
+			}
+		}
+		else{
+
+			// $data = array(
+			// 	'query' => $query);
+			$error = array(
+					'error' => $name);
+			$this->load->view('login', $error);
+
+			// $this->load->view('student',$query);
+			// header("Location: ../student");
+		}
 	}
 }
 
