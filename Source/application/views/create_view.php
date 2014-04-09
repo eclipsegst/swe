@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-
+<div>
 <form method="POST" action="create_assignment" id="newpageform" onsubmit="return validateForm()">
 <table align="left">
 	<tr>
@@ -38,9 +38,12 @@
 	</tr>
 </table>
 </form>
+<br /><?php echo $error; ?>
+</div>
 
-
-<?php echo $error; ?>
+<div>
+	<p>This page will create a new page. We do need a new page for each assignment or lab session that TA can create. But we also need to save the assignment or lab information to a table or something. The reason why we do that is we can implement new announcement easily which you might want to think of the newest announcment in blackboard. I don't know whether it's a task that must be done or not. We can talk about it later. -Zhaolong</p>
+</div>
 
 
 </body>
