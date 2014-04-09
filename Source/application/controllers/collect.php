@@ -63,7 +63,7 @@ class Collect extends CI_Controller {
 		// $this->zip->archive('./uploads/my_backup.zip'); 
 		// mkdir('./uploads/newfolder/', 0777, TRUE);
 		$path = './uploads/';
-		$labname = "lab6";
+		$labname = "lab6"; // pass lab or assignment name
 		$lab = $labname."."."zip";// be sure use double quotes
 		$this->zip->read_dir($path);
 		// Download the file to your desktop. Name it "lab6.zip"
