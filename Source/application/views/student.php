@@ -60,7 +60,10 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Anouncement</h1>
-          <h2 class="sub-header"><a href="./upload">Click me to check out an example of submission.</a></h2>
+          <h2 class="sub-header"><a href="./upload">Upload a file to a folder in the server.</a></h2>
+          <h2 class="sub-header"><a href="./create">Create New Assignment</a></h2>
+          <h2 class="sub-header"><a href="./collect">Download all the file form a folder in the server.</a></h2>
+          
           </div>
         </div>
       </div>
