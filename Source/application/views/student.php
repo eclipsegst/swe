@@ -37,16 +37,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">Logout</a>
+          <a class="navbar-brand" href="<?php echo base_url();?>login/do_logout/">Logout</a> <a class="navbar-brand">| Welcome <?php echo $this->session->userdata('firstname');?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="">Profile</a></li>
             <li><a href="">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </div>
@@ -62,11 +59,8 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          
-          <?php echo $this->session->flashdata('feedback');?>
           <h1 class="page-header">New Anouncement</h1>
-          <h2 class="sub-header"><a href="../index.php/upload">Click me to check out an example of submission.</a></h2>
-
+          <h2 class="sub-header"><a href="./upload">Click me to check out an example of submission.</a></h2>
           </div>
         </div>
       </div>
