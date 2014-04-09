@@ -10,7 +10,7 @@ class Create extends CI_Controller {
 
 	function index()
 	{
-		$this->load->view('create', array('error' => ' ' ));
+		$this->load->view('create_view', array('error' => ' ' ));
 	}
 
 	function create_assignment()
