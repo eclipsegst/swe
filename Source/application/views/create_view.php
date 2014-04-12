@@ -4,47 +4,44 @@
 <script>
 	function validateForm()
 	{
-		var t=document.forms["newpageform"]["title"].value;
-		var d=document.forms["newpageform"]["description"].value;
-		if (t==null || t=="")
+		var n=document.forms["newpageform"]["name"].value;
+		var d=document.forms["newpageform"]["duedate"].value;
+		if (n==null || n=="")
 	  	{
-	  		alert("Title must be filled out!");
+	  		alert("Name must be filled out!");
 	  		return false;
 	  	}
 	  	if (d==null || d=="")
 	  	{
-	  		alert("Description must be filled out!");
+	  		alert("duedate must be filled out!");
 	  		return false;
 	  	}
 	}
 </script>
 </head>
 <body>
+	<h1>Create An Assignment</h2>
 <div>
-<form method="POST" action="create_assignment" id="newpageform" onsubmit="return validateForm()">
-<table align="left">
-	<tr>
-  		<td align="left">Assignment Title:</td>
-  		<td><input type="text" name="title" size="70"></td>
-	</tr>
-	<tr>
-  		<td align="left">Description:</td>
-  		<td>
+<form method="POST" action="create/create_assignment" id="newpageform" onsubmit="return validateForm()">
+	<div>
+		<h3>1. Assignment Information
+		
+		<table>	
+			<tr><td>Name:</td><td><input type="text" name="name" size="26"></td></tr>
+			<tr><td>Instruction:</td><td><input type="file" name="instruction" size="26"></td></tr>
+			<tr><td>Due Date:</td><td><input type="text" name="duedate" size="26"></td></tr>
+			<tr><td>Points Possible:</td><td><input type="text" name="point" size="26"></td></tr>
+		</table>
+	</div>
+	<div>
+		<h3>2. Description</h3>
 		<textarea rows="10" cols="70" name="description" form="newpageform" placeholder="Enter content here..."></textarea>
+	</div>
+<input type="submit" name = "submit" value="Create Assignment" size = "20"/> | <a href="">Cancel</a>
 
-  		</td>
-	</tr>
-	<tr><td></td><td><input type="submit" name = "submit" value="Create Page" size = "20"/> | <a href="www.google.com">Cancel</a></td>
-	</tr>
-</table>
 </form>
 <br /><?php echo $error; ?>
 </div>
-
-<div>
-	<p>This page will create a new page. We do need a new page for each assignment or lab session that TA can create. But we also need to save the assignment or lab information to a table or something. The reason why we do that is we can implement new announcement easily which you might want to think of the newest announcment in blackboard. I don't know whether it's a task that must be done or not. We can talk about it later. -Zhaolong</p>
-</div>
-
 
 </body>
 </html>
