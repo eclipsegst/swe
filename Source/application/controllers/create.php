@@ -13,12 +13,10 @@ class Create extends CI_Controller {
 		$this->load->view('create_view', array('error' => ' ' ));
 	}
 
+	// this will create a folder under ./p/CS4320/
+	// send assignment title description and path to assignment table
 	function create_assignment()
 	{
-		// $error = array('error' =>"error");
-			
-		// 	$this->load->view('create',$error);
-
 		if(isset($_POST['submit'])) {
 			$labName = $_POST['title'];
 			$description = $_POST['description'];
@@ -39,27 +37,12 @@ class Create extends CI_Controller {
 				$lab_path = $course_path . $labName;
 				if(!is_dir($lab_path . "/")){
 					mkdir($lab_path, 0777, TRUE);
-					mkdir($lab_path . "/" ."Downloads", 0777, TRUE);
 				}
-
-				$new_page_path = $lab_path ."/" . $newPageName;
-				// if (!write_file("./uploads/file.php", $newPageContent))
-				if (!write_file($new_page_path, $newPageContent))
-				{
-				//      // echo 'Unable to write the file';
-				}
-				// else
-				// {
-				//      // echo 'File written!';
-				// }
-				// $error = array('error' =>$newPageName);
-				
 			}
 
-			// header('Location: ../.'.'./p/CS4320/lab_26/lab_26.php');
-			header('Location: ./.'. $new_page_path);
+
+			// header('Location: ./.'. $new_page_path);
 			
-			// $this->load->view('create',$error);
 		}
 		else
 		{
