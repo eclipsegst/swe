@@ -26,20 +26,32 @@ function checkFile(e) {
 </script>
 </head>
 <body>
-
+<div><a href="./student">Home</a></div>
 <?php echo $error;?>
 
 <?php echo form_open_multipart('upload/do_upload');?>
+<h1>Upload Assignment</h1> 
+<hr>
+<div>
+    <h3>1. Assignment Information</h3>
+    Name:<br />
+    Instructions:</br>
+    Due Date: </br>
+    Points Possible: </br>
+</div>
+<div>
+    <h3>2. Assignment Submission</h3>
+    Attach File: <input type="file" name="userfile" size="20" id="confirm" value="Browse My Computer" />
 
-<input type="file" name="userfile" size="20" id="confirm" />
-
-<br /><br />
-
-<input type="submit" value="upload" />
+</div>
+<div>
+    <h3>3. Add Comments</h3>
+        <textarea rows="10" cols="70" name="description" form="newpageform" placeholder="Enter content here..."></textarea>
+</div>
+<div>
+    <input type="submit" name = "submit" value="Submit" size = "20"/> | <a href="">Cancel</a></td>
+</div>
 
 </form>
-<p>It will upload to a root folder called "uploads".</p>
-<div><a href="./student">Home</a></div>
-
 </body>
 </html>
