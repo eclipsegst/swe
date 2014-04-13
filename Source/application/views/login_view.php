@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<!-- saved from url=(0039)http://getbootstrap.com/examples/cover/ -->
-<html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" href="http://cdn.polkadotbride.com/wp-content/uploads/2008/03/n.jpg">
-    <title>Login</title>
-  <style id="holderjs-style" type="text/css"></style>
+<head>
+<style>
+table,th,td
+{
+/*border:1px solid black;*/
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+th
+{
+text-align:left;
+}
+</style>
 </head>
 
   <body>
@@ -17,6 +26,32 @@
       </table>
     </form>
     <br /> <?php if(! is_null($msg)) echo $msg;?>
-
+<div>
+  <table style="width:1200px">
+    <tr>
+      <th>uid</th>
+      <th>lastname</th>
+      <th>firstname</th>    
+      <th>pawprint</th>
+      <th>password</th>
+      <th>role</th>
+    </tr>
+    <?php 
+    foreach ($query as $user)
+    {
+    ?>
+    <tr>
+      <td><?php echo $user->uid; ?></td>
+      <td><?php echo $user->lastname; ?></td>
+      <td><?php echo $user->firstname; ?></td>
+      <td><?php echo $user->pawprint; ?></td>
+      <td><?php echo $user->password; ?></td>
+      <td><?php echo $user->role; ?></td>
+    <tr>
+    <?php
+    }
+    ?>
+  </table>
+</div>
 </body>
 </html>
