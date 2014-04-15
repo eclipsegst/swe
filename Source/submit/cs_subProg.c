@@ -99,6 +99,7 @@ void cleanup()
 	free(filename);
 	free(course);
 	free(section);
+	
 }
 
 //get pawprint by making system call
