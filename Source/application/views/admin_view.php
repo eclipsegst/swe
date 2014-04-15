@@ -7,6 +7,7 @@
 <a href="<?php echo base_url();?>student"> Student Page </a><br />
 <a href="<?php echo base_url();?>ta"> TA Page </a><br />
 <a href="<?php echo base_url();?>professor"> Professor Page </a><br />
+<a href="<?php echo base_url();?>course"> Add course Page </a><br />
 
 <br /> 
 If you want to access student, TA or Professor page, make sure you role correct.
