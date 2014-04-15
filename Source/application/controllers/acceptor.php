@@ -1,7 +1,7 @@
 <?php
 //Filename/path = Course/section/assn/pawprint/filename-hash_timestamp.extension
 //$path='./uploads/' . $course . '/' . $section . '/' . $assn . '/'; + filename goes here
-class Collect extends CI_Controller {
+class Accept extends CI_Controller {
 
 	//Return true if the file is within the bounds
 	//otherwise retiurn false
@@ -38,8 +38,13 @@ class Collect extends CI_Controller {
 	// return new_hash
 	// Case 2: match, everything's good, 
 	// return TRUE
-	function check_hash($recieved_hash, $file) {
-	
+	function check_hash($recieved_hash, $file_path) {
+	$hash = hash_file( "sha512", $file_path);
+		if($hash == $received_hash) {
+			return  TRUE;
+			} else {
+				return FALSE;
+			}
 	
 	}
 
