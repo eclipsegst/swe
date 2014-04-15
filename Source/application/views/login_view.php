@@ -1,20 +1,5 @@
-<head>
-<style>
-table,th,td
-{
-/*border:1px solid black;*/
-border-collapse:collapse;
-}
-th,td
-{
-padding:5px;
-}
-th
-{
-text-align:left;
-}
-</style>
-</head>
+<?php include './assets/template/header.php'; ?>
+
 
   <body>
     <h1> Login </h1>
@@ -26,32 +11,6 @@ text-align:left;
       </table>
     </form>
     <br /> <?php if(! is_null($msg)) echo $msg;?>
-<div>
-  <table style="width:1200px">
-    <tr>
-      <th>uid</th>
-      <th>lastname</th>
-      <th>firstname</th>    
-      <th>pawprint</th>
-      <th>password</th>
-      <th>role</th>
-    </tr>
-    <?php 
-    foreach ($query as $user)
-    {
-    ?>
-    <tr>
-      <td><?php echo $user->uid; ?></td>
-      <td><?php echo $user->lastname; ?></td>
-      <td><?php echo $user->firstname; ?></td>
-      <td><?php echo $user->pawprint; ?></td>
-      <td><?php echo $user->password; ?></td>
-      <td><?php echo $user->role; ?></td>
-    <tr>
-    <?php
-    }
-    ?>
-  </table>
-</div>
-</body>
-</html>
+You can use pawprint and cellphone number to login.<br />
+
+<?php include './assets/template/footer.php'; ?>

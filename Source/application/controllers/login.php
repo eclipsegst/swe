@@ -19,18 +19,19 @@ class Login extends CI_Controller {
 			$msg = '<font color=red>Invalid username and/or password.</font><br />';
 			$this->index($msg);
 		}else{
-			$role = $this->session->userdata('role');
-			if($role == 'student')
-			{
-				redirect('student');
-			}elseif($role == 'ta')
-			{
-				redirect('ta');
-			}elseif($role == 'professor'){
-				redirect('professor');
-			}else{
-				redirect('admin');
-			}
+			// $role = $this->session->userdata('role');
+			// if($role == 'student')
+			// {
+			// 	redirect('student');
+			// }elseif($role == 'ta')
+			// {
+			// 	redirect('ta');
+			// }elseif($role == 'professor'){
+			// 	redirect('professor');
+			// }else{
+			// 	redirect('admin');
+			// }
+			redirect('admin');
 		}
 	}
 
