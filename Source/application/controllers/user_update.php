@@ -4,7 +4,6 @@ class User_update extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
-		// $vid = $_GET["vid"];
 		$uid = $this->input->get('uid',true);
 
 		$data['msg'] = $msg;
@@ -27,7 +26,7 @@ class User_update extends CI_Controller {
         $data = array(
                     'uid'       => $uid,
                     'lastname'  => $lastname,
-                    'firstname' =>$firstname,
+                    'firstname' => $firstname,
                     'pawprint'  => $pawprint,
                     'role'      => $role
                     );
