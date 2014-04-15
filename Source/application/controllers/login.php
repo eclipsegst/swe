@@ -2,37 +2,40 @@
 
 class Login extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
+	public function index($msg = NULL)
 	{
-		$this->load->view('login');
+		$data['msg'] = $msg;
+		$this->load->model('login_model');
+		$query = $this->login_model->get_all_users();
+		$data['query'] = $query->result();
+		$this->load->view('login_view', $data);
 	}
 
-	function roleCheck()
+	function process()
 	{
-		$this->load->library('session');
-		$this->session->keep_flashdata('feedback');
-		$this->session->set_flashdata('feedback', 'Success message for client to see');
-		
-		header("Location: ../student");
-
-		// $this->load->view('student');
+		$this->load->model('login_model');
+		$result = $this->login_model->validate();
+		if(!$result){
+			$msg = '<font color=red>Invalid username and/or password.</font><br />';
+			$this->index($msg);
+		}else{
+			$role = $this->session->userdata('role');
+			if($role == 'student')
+			{
+				redirect('student');
+			}elseif($role == 'ta')
+			{
+				redirect('ta');
+			}elseif($role == 'professor'){
+				redirect('professor');
+			}else{
+				redirect('admin');
+			}
+		}
 	}
+
+	public function do_logout(){
+        $this->session->sess_destroy();
+        redirect('login');
+    }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
