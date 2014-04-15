@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<!-- saved from url=(0039)http://getbootstrap.com/examples/cover/ -->
-<html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" href="http://cdn.polkadotbride.com/wp-content/uploads/2008/03/n.jpg">
-    <title>Login</title>
-  <style id="holderjs-style" type="text/css"></style>
-</head>
+<?php include './assets/template/header.php'; ?>
+
 
   <body>
     <h1> Login </h1>
@@ -17,6 +11,6 @@
       </table>
     </form>
     <br /> <?php if(! is_null($msg)) echo $msg;?>
+You can use pawprint and cellphone number to login.<br />
 
-</body>
-</html>
+<?php include './assets/template/footer.php'; ?>
