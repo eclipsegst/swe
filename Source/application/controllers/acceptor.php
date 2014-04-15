@@ -47,6 +47,18 @@ class Accept extends CI_Controller {
 			}
 	
 	}
+	
+	function store_file($file_name, $course, $section, $assignment) {
+		$timestamp = time();
+		
+		// IF /course/assignment/section/$pawprint !exists, create the directory
+		
+		if(move_uploaded_file ($_FILES[file_up][tmp_name], $file_name.$timestamp)){
+			echo "Congratulations, file succesfully uploaded";
+		} else {
+			echo "Failed to upload file";
+			}
+	}
 
 
 }
