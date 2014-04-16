@@ -17,17 +17,18 @@ class Course_update extends CI_Controller {
 	function update()
 	{
 
-		$uid = $this->input->get('cid',true);
-        $cid 	   = $_POST['cid'];
+		$cid = $this->input->get('cid',true);
+		$cid         = $_POST['cid'];
+        $courseid    = $_POST['courseid'];
     	$coursename  = $_POST['coursename'];
     	$description = $_POST['description'];
-    	$section  = $_POST['section'];
+
     
         $data = array(
-                    'cid'       => $cid,
+        			'cid'         => $cid,
+                    'courseid'    => $courseid,
                     'coursename'  => $coursename,
-                    'description' => $description,
-                    'section'  => $section
+                    'description' => $description
                     );
 
         $this->load->model('course_model');

@@ -6,9 +6,14 @@
 		foreach ($query as $course)
 		{
 		?>
+
 <tr><td>
 CID: 
-</td><td><input type="text" value="<?php echo $course->cid;?>" name="cid" size="25" >
+</td><td><input type="text" value="<?php echo $course->cid; ?>" name="cid" size="25">
+</td></tr>
+<tr><td>
+Course ID: 
+</td><td><input type="text" value="<?php echo $course->courseid; ?>" name="courseid" size="25">
 </td></tr>
 <tr><td>
 Course Name: 
@@ -19,12 +24,6 @@ Course Name:
 Description: 
 </td><td><input type="text" value="<?php echo $course->description; ?>" name="description" size="25">
 </td></tr>
-
-<tr><td>
-Section: 
-</td><td><input type="text" value="<?php echo $course->section; ?>" name="section" size="25">
-</td></tr>
-
 		<?php
 		}
 		?>
