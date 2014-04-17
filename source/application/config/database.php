@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'dbhost-mysql.cs.missouri.edu';
-$db['default']['username'] = 'zztg2';
-$db['default']['password'] = '880420';
-$db['default']['database'] = 'zztg2';
+$db['default']['username'] = 'cs4320s14grp14';
+$db['default']['password'] = 'Tvy8.vmPx=';
+$db['default']['database'] = 'cs4320s14grp14';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
