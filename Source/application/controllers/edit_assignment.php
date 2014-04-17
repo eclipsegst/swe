@@ -6,4 +6,23 @@ class EditAssignment extends CI_Controller {
 //create directories as needed,
 // determine if isSplitBySections: create section directory
 
+
+	function create() {
+		//Do Stuff
+	}
+
+//SCHEMA: /course/assignment/section/$pawprint
+	function add_course($course_name) {
+		//create course directory
+	}
+	
+	//array
+	function add_sections($sections) {
+		//create section directory
+	}
+	
+	function add_assignment($assn_name) {
+		//create addignment directory
+	}
+
 ?>

@@ -19,6 +19,7 @@ off_t validateFilePassed(const char *filename)
 	if(file == NULL)
 	{
 		printf("File %s doesn't exist\n",filename);
+		makeLogEntry("File doesn't exist");
 		return -1;
 	}
 	//File exists print success
@@ -35,12 +36,14 @@ off_t validateFilePassed(const char *filename)
 	else
 	{
 		printf("Error encountered when determining file size\n");
+		makeLogEntry("Error encountered when determining file size");
 		return -1;
 	}
 	//check if file size exceeds the limit
 	if (fSize > MAX_FILE_SIZE)
 	{
 		printf("Error file size is over the specified cap \n");
+		makeLogEntry("Error file size is over the specified cap");
 		return -1;
 	}
 	return fSize;	
