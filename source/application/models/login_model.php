@@ -22,26 +22,31 @@ class Login_model extends CI_Model{
             if($row->role == 0){
                 $data=array(
                     'role' => "student",
+                    'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
             }elseif ($row->role == 1) {
                 $data=array(
                     'role' => "ta",
+                    'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
             }elseif ($row->role == 2) {
                 $data=array(
                     'role' => "professor",
+                    'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
             }elseif ($row->role == 3) {
                 $data=array(
-                    'role' => "tester",
+                    'role' => "admin",
+                    'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
             }else{
                 $data=array(
                     'role' => "admin",
+                    'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
             }
@@ -57,7 +62,5 @@ class Login_model extends CI_Model{
         $query = $this->db->get('users');
         return $query;
     }
-
-
 }
 ?>
