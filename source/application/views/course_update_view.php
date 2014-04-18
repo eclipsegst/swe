@@ -18,13 +18,7 @@ Course Name:
 
 Description: 
 </td><td><input type="text" value="<?php echo $course->description; ?>" name="description" size="25">
-</td></tr>
-
-<tr><td>
-Section: 
-</td><td><input type="text" value="<?php echo $course->section; ?>" name="section" size="25">
-</td></tr>
-
+</td></tr
 		<?php
 		}
 		?>

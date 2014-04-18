@@ -21,13 +21,11 @@ class Course_update extends CI_Controller {
         $cid 	   = $_POST['cid'];
     	$coursename  = $_POST['coursename'];
     	$description = $_POST['description'];
-    	$section  = $_POST['section'];
     
         $data = array(
                     'cid'       => $cid,
                     'coursename'  => $coursename,
-                    'description' => $description,
-                    'section'  => $section
+                    'description' => $description
                     );
 
         $this->load->model('course_model');
