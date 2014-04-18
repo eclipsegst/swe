@@ -4,7 +4,6 @@
 
 <div >
 <h1 >New Anouncement</h1>
-<h2 ><a href="./upload">Upload a file to a folder in the server.</a></h2>
 <?php echo $msg;?>
 </div>
 

@@ -15,12 +15,15 @@ class Course extends CI_Controller {
 
   function delete()
   {
-    $cid = $this->input->get('cid',true);
+    $courseid = $this->input->get('courseid',true);
+    $dir = './p/'.$courseid;
+    system('/bin/rm -rf ' . escapeshellarg($dir));
+
     $this->load->model('course_model');
-    $this->course_model->delete($cid);
+    $this->course_model->delete($courseid);
     $this->index();
   }
-  
+
   public function do_logout(){
         $this->session->sess_destroy();
         redirect('login');

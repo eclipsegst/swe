@@ -21,7 +21,7 @@
       		<td><?php echo $course->description; ?></td>
 			<td>
 			<a href="<?php echo base_url(); ?>course_update?cid=<?php echo $course->cid; ?>">Edit</a>
-			<a href="<?php echo base_url(); ?>course/delete?cid=<?php echo $course->cid; ?>">Delete</a>
+			<a href="<?php echo base_url(); ?>course/delete?courseid=<?php echo $course->courseid; ?>">Delete</a>
 			<a href="<?php echo base_url(); ?>assignment_new?courseid=<?php echo $course->courseid; ?>">Add an assignment</a>
 			</td>
 		<tr>

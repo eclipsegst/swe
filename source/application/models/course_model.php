@@ -25,9 +25,9 @@ class Course_model extends CI_Model{
         $this->db->where('cid', $cid);
         $this->db->update('Courses', $data); 
     }
-    function delete($cid)
+    function delete($courseid)
     {
-    	$this->db->where('cid',$cid);
+    	$this->db->where('courseid',$courseid);
         $this->db->delete('Courses');
     }
 }
