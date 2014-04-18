@@ -8,14 +8,27 @@ class Upload extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 	}
 
-	function index()
+	function index($msg=NULL)
 	{
-		$this->load->view('upload_view', array('error' => ' ' ));
+		$data =$msg;
+		$courseid = $_GET['courseid'];
+		$aname = $_GET['aname'];
+
+		$data['aname'] = $aname;
+		$data['courseid'] = $courseid;
+		$this->load->view('upload_view',$data);
 	}
 
 	function do_upload()
 	{
-		$config['upload_path'] = './uploads/';
+		$courseid = $_GET['courseid'];
+		$aname = $_GET['aname'];
+		$pawprint = $this->session->userdata('pawprint');
+		$assignment_path = './p/'.$courseid.'/'.$aname.'/'.$pawprint;
+		if (!is_dir($assignment_path)){
+			mkdir($assignment_path, 0777, TRUE);	
+		}
+		$config['upload_path'] = $assignment_path;
 		$config['allowed_types'] = '*';
 		$config['max_size']	= '5242880';
 		$config['min_size']	= '1';
@@ -24,17 +37,12 @@ class Upload extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
-
-			$this->load->view('upload_view', $error);
-		}
-		else
-		{
+		if($this->upload->do_upload()){
 			$data = array('upload_data' => $this->upload->data());
-
 			$this->load->view('upload_success', $data);
+		}else{
+			$msg = "Upload failed.";
+			$this->index($msg);
 		}
 	}
 }

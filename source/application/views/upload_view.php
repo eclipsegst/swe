@@ -27,15 +27,12 @@ function checkFile(e) {
 </head>
 <body>
 <div><a href="./student">Home</a></div>
-<?php echo $error;?>
-
-<?php echo form_open_multipart('upload/do_upload');?>
-<h1>Upload Assignment</h1> 
+<?php echo form_open_multipart('upload/do_upload?courseid='. $courseid.'&aname='.$aname);?>
+<h1>Submit an Assignment</h1> 
 <hr>
 <div>
     <h3>1. Assignment Information</h3>
     Name:<br />
-    Instructions:</br>
     Due Date: </br>
     Points Possible: </br>
 </div>
@@ -53,5 +50,6 @@ function checkFile(e) {
 </div>
 
 </form>
+
 </body>
 </html>

@@ -12,8 +12,6 @@
 <?php endforeach; ?>
 </ul>
 
-<p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
-
 <div><a href="../student">Home</a></div>
 </body>
 </html>
