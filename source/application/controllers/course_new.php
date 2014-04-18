@@ -10,20 +10,24 @@ class Course_new extends CI_Controller {
 
 	function insert()
 	{
-		$cid 	     = $_POST['cid'];
+		$courseid 	 = $_POST['courseid'];
     	$coursename  = $_POST['coursename'];
     	$description = $_POST['coursedescription'];
-    	$section     = $_POST['section'];
 			
         $data = array(
-                    'cid'         => $cid,
+                    'courseid'     => $courseid,
                     'coursename'  => $coursename,
                     'description' => $description,
-                    'section'     => $section
                     );
 
         $this->load->model('course_model');
         $this->course_model->insert($data);
+
+        $course_folder = "./p/" . $courseid;
+			
+		if (!is_dir($course_folder)){
+			mkdir($course_folder, 0777, TRUE);	
+		}
 
 		$msg = 'Add successully!';
 		$this->index($msg);

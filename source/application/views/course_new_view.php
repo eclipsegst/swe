@@ -3,7 +3,7 @@
 <table>
 <form method="POST" action="<?php echo base_url();?>course_new/insert">
 <tr><td>
-CID: </td><td><input type="text" name="cid" size="25">
+Course ID: </td><td><input type="text" name="courseid" size="25">
 </td></tr>
 <tr><td>
 Course Name: </td><td><input type="text" name="coursename" size="25">
