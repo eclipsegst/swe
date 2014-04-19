@@ -20,6 +20,13 @@ class Course_model extends CI_Model{
         $query = $this->db->get_where('Courses', array('cid' =>$cid));
         return $query;
     }
+
+    function selectByCourseID($courseid)
+    {
+        $query = $this->db->get_where('Courses', array('courseid' =>$courseid));
+        return $query;
+    }
+    
     function update($data,$cid)
     {
         $this->db->where('cid', $cid);
