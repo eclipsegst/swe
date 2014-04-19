@@ -20,6 +20,16 @@ class Assignment_model extends CI_Model{
         $query = $this->db->get_where('Assignments', array('aid' =>$aid));
         return $query;
     }
+
+    function selectByName($courseid,$aname)
+    {
+        $query = $this->db->get_where('Assignments', 
+            array('aname' =>$aname,
+                'courseid'=>$courseid
+            ));
+        return $query;
+    }
+
     function update($data,$aid)
     {
         $this->db->where('aid', $aid);
