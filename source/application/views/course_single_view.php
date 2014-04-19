@@ -1,4 +1,5 @@
 
+<?php include './assets/template/header.php'; ?>
 <?php 
 foreach ($courses as $course)
 {
@@ -39,6 +40,7 @@ Description:
 <div>
 	<table style="width:1200px">
 		<tr>
+			<th></th>
 			<th>Course ID</th>
 		 	<th>Assingment ID</th>
 		 	<th>Assignment Name</th>
@@ -51,7 +53,9 @@ Description:
 		{
 			if( $assignment->courseid== $courseid){
 		?>
-		<tr><td><?php echo $assignment->courseid; ?></td>
+		<tr><td><a href="<?php echo base_url(); ?>assignment_single?courseid=<?php echo $assignment->courseid; ?>&aname=<?php echo $assignment->aname; ?>">Select</a>
+			</td>
+			<td><?php echo $assignment->courseid; ?></td>
 			<td><?php echo $assignment->aid; ?></td>
 			<td><?php echo $assignment->aname; ?></td>
       		<td><?php echo $assignment->duedate; ?></td>
