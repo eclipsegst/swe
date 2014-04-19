@@ -61,7 +61,6 @@ Description:
       		<td><?php echo $assignment->duedate; ?></td>
       		<td><?php echo $assignment->description; ?></td>
 			<td>
-			<a href="<?php echo base_url(); ?>collect/download_all?courseid=<?php echo $assignment->courseid; ?>&aname=<?php echo $assignment->aname; ?>">Download all students' submission</a>
 			</td>
 		<tr>
 		<?php }
