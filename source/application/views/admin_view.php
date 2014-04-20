@@ -2,7 +2,7 @@
 <h3>Instruction</h3>
 <ul>
 	<li>Account page lists all the users and their roles.</li>
-	<li>You can change the role to access different pages.</li>
+	<li>You can change the role to access to different pages.</li>
 
 </ul>
 <a href="<?php echo base_url();?>user"> Account Page </a><br/>
