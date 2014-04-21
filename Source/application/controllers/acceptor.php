@@ -25,7 +25,7 @@ class Accept extends CI_Controller {
 		} */
 		
 		if($isSameHash != TRUE) {
-		$errorMessage .= "There was an error sending the file\nExpected:" . $recieved_hash . "\nRecieved:" . $isSameHash . "\n\n";
+		$errorMessage .= "There was an error sending the file.\nExpected:" . $recieved_hash . "\nRecieved:" . $isSameHash . "\n\n";
 		}
 		
 		if($isValidParams != 000) {
@@ -62,11 +62,11 @@ class Accept extends CI_Controller {
 			}
 		}
 		
-		//If there was an error
+		//If everything looks good
 		if(empty($errorMessage)) {
 		
 		
-		//Everything looks good
+		//An error occured
 		} else {
 		$errorMessage = "\n========  ERROR ========\n\n" . $errorMessage;
 		//handle errors ->log and send message to user
