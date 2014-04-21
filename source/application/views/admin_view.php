@@ -14,3 +14,4 @@
 <a href="<?php echo base_url();?>ta"> TA Page </a><br />
 <a href="<?php echo base_url();?>professor"> Professor Page </a><br />
 <a href="<?php echo base_url();?>course"> Course List Page </a><br />
+<a href="<?php echo base_url();?>professor_new"> Add a professor to a course </a><br />
