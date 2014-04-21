@@ -39,7 +39,7 @@ class Accept extends CI_Controller {
 	// Case 2: match, everything's good, 
 	// return TRUE
 	function check_hash($recieved_hash, $file_path) {
-	$hash = hash_file( "sha512", $file_path);
+	$hash = hash_file( "sha256", $file_path);
 		if($hash == $received_hash) {
 			return  TRUE;
 			} else {
