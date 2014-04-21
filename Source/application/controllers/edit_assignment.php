@@ -6,6 +6,10 @@ class EditAssignment extends CI_Controller {
 //create directories as needed,
 // determine if isSplitBySections: create section directory
 
+	function __construct() {
+		parent::__construct();
+	
+	}
 
 	function create() {
 		//Do Stuff
