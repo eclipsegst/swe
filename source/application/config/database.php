@@ -50,9 +50,9 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'dbhost-mysql.cs.missouri.edu';
 $db['default']['username'] = 'cs4320s14grp14';
-$db['default']['password'] = 'Tvy8.vmPx=';
+$db['default']['password'] = 'WtWHcx2m';
 $db['default']['database'] = 'cs4320s14grp14';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
