@@ -58,7 +58,8 @@ int main(int argc,char **argv)
 		return -1;
 	}
 	getPawprint();
-	
+	struct string s;
+    init_string(&s);
 	curl_global_init(CURL_GLOBAL_ALL);
 	
 	curl_formadd(&post,&last,CURLFORM_COPYNAME,"file",CURLFORM_FILE,
@@ -75,6 +76,7 @@ int main(int argc,char **argv)
 	else
 	{
 		printf("init prob\n");
+		return -1;
 	}
 	
 	curl_easy_setopt(curl,CURLOPT_URL,url);
@@ -86,6 +88,13 @@ int main(int argc,char **argv)
 	{
 		printf("File sending successfull\n\n");
 		//printf("%s"s->ptr);
+		printf("Submission details:\n\n");
+		printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
+				"Assignment: %s\n",userName,filename,fSize,course,section,assign);
+	
+		sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
+		"Assignment: %s",userName,filename,fSize,course,section,assign);
+		makeLogEntry(subDetails);
 		
 	}
 	else
@@ -93,13 +102,7 @@ int main(int argc,char **argv)
 		printf("Error in sending file\n");
 	}
 	
-	printf("Submission details:\n\n");
-	printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
-	"Assignment: %s\n",userName,filename,fSize,course,section,assign);
 	
-	sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
-	"Assignment: %s",userName,filename,fSize,course,section,assign);
-	makeLogEntry(subDetails);
 	curl_easy_cleanup(curl);
 	return 0;
 }
