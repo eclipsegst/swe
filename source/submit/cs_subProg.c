@@ -5,6 +5,12 @@ int main(int argc,char **argv)
 {
 	int result = 0;
 	char subDetails[255];
+	struct curl_httppost* post = NULL;
+	struct curl_httppost* last = NULL;
+	CURL *curl;
+    CURLcode res;
+	
+	
 	if(argc != 4)
 	{
 		printf("Incorrect number of parameters.\n"
@@ -52,6 +58,41 @@ int main(int argc,char **argv)
 		return -1;
 	}
 	getPawprint();
+	
+	curl_global_init(CURL_GLOBAL_ALL);
+	
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"file",CURLFORM_FILE,
+					 filename,CURLFORM_END);
+					 
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"submit",CURLFORM_COPYCONTENTS,
+					 "submit",CURLFORM_END);					 
+	curl = curl_easy_init();
+	if(curl)
+	{
+		//printf("hello");
+		
+	}
+	else
+	{
+		printf("init prob\n");
+	}
+	
+	curl_easy_setopt(curl,CURLOPT_URL,url);
+	curl_easy_setopt(curl,CURLOPT_HTTPPOST,post);
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunc);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
+	res = curl_easy_perform(curl);
+	if(res == CURLE_OK)
+	{
+		printf("File sending successfull\n\n");
+		//printf("%s"s->ptr);
+		
+	}
+	else
+	{
+		printf("Error in sending file\n");
+	}
+	
 	printf("Submission details:\n\n");
 	printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
 	"Assignment: %s\n",userName,filename,fSize,course,section,assign);
@@ -59,7 +100,7 @@ int main(int argc,char **argv)
 	sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
 	"Assignment: %s",userName,filename,fSize,course,section,assign);
 	makeLogEntry(subDetails);
-	
+	curl_easy_cleanup(curl);
 	return 0;
 }
 
@@ -112,3 +153,30 @@ char* getPawprint()
 
 }
 
+void init_string(struct string *s)
+ {
+	s->len = 0;
+	s->ptr = malloc(s->len+1);
+	if (s->ptr == NULL) 
+	{
+		fprintf(stderr, "malloc() failed\n");
+		exit(EXIT_FAILURE);
+	}
+	s->ptr[0] = '\0';
+}
+
+size_t writeFunc(void *ptr, size_t size, size_t nmemb, struct string *s)
+{
+	size_t new_len = s->len + size*nmemb;
+	s->ptr = realloc(s->ptr, new_len+1);
+	if (s->ptr == NULL) 
+	{
+		fprintf(stderr, "realloc() failed\n");
+		exit(EXIT_FAILURE);
+	}
+	memcpy(s->ptr+s->len, ptr, size*nmemb);
+	s->ptr[new_len] = '\0';
+	s->len = new_len;
+
+	return size*nmemb;
+}

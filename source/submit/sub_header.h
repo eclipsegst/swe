@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <curl/curl.h>
 
 #define MAX_FILE_SIZE 5242880	//5MB
 
@@ -20,6 +21,14 @@ char *userName;
 struct passwd *pwptr;
 char url[255];
 char webname[255];
+struct string {
+  char *ptr;
+  size_t len;
+};
+
+void init_string(struct string *s);
+
+size_t writeFunc(void *ptr, size_t size, size_t nmemb, struct string *s);
 
 void cleanup();
 
