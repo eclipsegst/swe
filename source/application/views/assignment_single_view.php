@@ -1,7 +1,7 @@
 <?php include './assets/template/header.php'; ?>
 <?php echo $msg;?>
 <div>
-	<table style="width:1200px">
+	<table style="width:600px">
 		<tr>
 			<th>Course ID</th>
 		 	<th>Assingment ID</th>
@@ -33,19 +33,20 @@
 
 <hr>
 <h3>This is a list of all submission of this assignment</h3>
-	<?php 
-	foreach ($stack as $items)
-	{
-		$pieces = explode("/", $items);
-		$pawprint = $pieces[3];
-		$filename = $pieces[4];
-	?> 
+	
 	<table>
 		<tr>
 			<th>Pawprint</th>
 			<th>File name</th>
 			<th>Action</th>
 		</tr>
+		<?php 
+		foreach ($stack as $items)
+		{
+			$pieces = explode("/", $items);
+			$pawprint = $pieces[3];
+			$filename = $pieces[4];
+		?> 
 		<tr>
 			<td><?php echo $pawprint;?></td>
 			<td><?php echo $filename;?></td>
@@ -54,9 +55,10 @@
 				<a href="<?php echo base_url(); ?><?php echo $items; ?>">Open</a>
 			</td>
 		</tr>
+		<?php 
+		}
+		?>
 	</table>
-	<?php 
-	}
-	?>
+	
 		
 
