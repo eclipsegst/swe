@@ -14,14 +14,16 @@ class Assignment_single extends CI_Controller {
 
 
 	    $this->load->helper('directory');
-
+	    $stack = array();
 	    $rootpath = 'p/'.$courseid.'/'.$aname.'/';
 		$fileinfos = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootpath));
-		$stack = array();
-		foreach($fileinfos as $pathname => $fileinfo) {
+		if(!empty($fileinf)){
+			foreach($fileinfos as $pathname => $fileinfo) {
 		    if (!$fileinfo->isFile()) continue;
 		    array_push($stack, $pathname);
+			}
 		}
+		
 		$data['stack'] = $stack;
 		$data['msg'] = $msg;
 		$this->load->view('assignment_single_view', $data);

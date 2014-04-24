@@ -13,7 +13,7 @@ class Login_model extends CI_Model{
         $this->db->where('pawprint', $pawprint);
         $this->db->where('password', $password);
         
-        $query = $this->db->get('users');
+        $query = $this->db->get('Users');
         // Let's check if there are any results
         if($query->num_rows == 1)
         {
@@ -59,7 +59,7 @@ class Login_model extends CI_Model{
 
     function get_all_users()
     {
-        $query = $this->db->get('users');
+        $query = $this->db->get('Users');
         return $query;
     }
 }

@@ -13,14 +13,5 @@
 <a href="<?php echo base_url();?>student"> Student Page </a><br />
 <a href="<?php echo base_url();?>ta"> TA Page </a><br />
 <a href="<?php echo base_url();?>professor"> Professor Page </a><br />
-<<<<<<< HEAD:Source/application/views/admin_view.php
-<a href="<?php echo base_url();?>course"> Course ListPage </a><br />
-
-<br /> 
-If you want to access student, TA or Professor page, make sure you role correct.
-<br />
-You can change your role using User Page.
-=======
 <a href="<?php echo base_url();?>course"> Course List Page </a><br />
 <a href="<?php echo base_url();?>professor_new"> Add a professor to a course </a><br />
->>>>>>> master:source/application/views/admin_view.php
