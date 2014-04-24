@@ -16,12 +16,11 @@ class Assignment_single extends CI_Controller {
 	    $this->load->helper('directory');
 	    $stack = array();
 	    $rootpath = 'p/'.$courseid.'/'.$aname.'/';
+		////if there is no submitted file, there might be an error because the line below.
 		$fileinfos = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootpath));
-		if(!empty($fileinf)){
-			foreach($fileinfos as $pathname => $fileinfo) {
-		    if (!$fileinfo->isFile()) continue;
-		    array_push($stack, $pathname);
-			}
+		foreach($fileinfos as $pathname => $fileinfo) {
+	    	if (!$fileinfo->isFile()) continue;
+	    	array_push($stack, $pathname);
 		}
 		
 		$data['stack'] = $stack;
