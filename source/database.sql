@@ -27,9 +27,17 @@ INSERT INTO Assignments VALUES (1,'CS4320','Homework #1',NULL,NULL),(2,'CS4320',
 DROP TABLE IF EXISTS Courses;
 CREATE TABLE Courses (
 	cid SERIAL PRIMARY KEY,
-	courseid varchar(10) NOT NULL default '' REFERENCES Courses,
+	courseid varchar(10) NOT NULL default '',
 	coursename varchar(50) NOT NULL default '',
 	description varchar(250) NOT NULL default ''
+);
+
+DROP TABLE IF EXISTS Section;
+CREATE TABLE Section (
+        sid SERIAL PRIMARY KEY,
+        sectionid varchar(1) NOT NULL DEFAULT '1',
+        courseid varchar(10) NOT NULL REFERENCES Courses,
+        description varchar(250) NOT NULL DEFAULT ''
 );
 
 INSERT INTO Courses VALUES (1,'CS4320','Software Engineering I - SP2014','you can add it some'),(2,'CS4380','Database Management Systems I, Sec. 01 - SP2014','Some description'),(3,'CS4520','Operating Systems I, Sec. 01 - SP2014','description');
@@ -66,8 +74,9 @@ DROP TABLE IF EXISTS pro_ta_course;
 CREATE TABLE pro_ta_course (
 	ptc SERIAL PRIMARY KEY,
 	courseid varchar(10) NOT NULL REFERENCES Courses,
-	ppawprint varchar(25) NOT NULL DEFAULT '',
-	tpawprint varchar(25) NOT NULL DEFAULT ''
+	pawprint varchar(25) NOT NULL DEFAULT '',
+        uid int(5) NOT NULL REFERENCES Users
+	<--tpawprint varchar(25) NOT NULL DEFAULT ''-->
 );
 
 INSERT INTO `pro_ta_course` VALUES (1,'CS4320',NULL,NULL),(2,'CS4380',NULL,NULL),(3,'CS4520',NULL,NULL);
@@ -76,6 +85,9 @@ DROP TABLE IF EXISTS log;
 CREATE TABLE log (
 	log_id SERIAL PRIMARY KEY,
 	pawprint varchar(25) NOT NULL DEFAULT '',
+        courseid varchar(10) NOT NULL REFERENCES Courses,
+        aid int(5) REFERENCES Assignment,
+        sectionid char(1) NOT NULL DEFAULT '',
 	log_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	action varchar(50) NOT NULL
 );
