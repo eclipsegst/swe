@@ -1,5 +1,5 @@
-<html>
-<head>
+
+<?php include './assets/template/header_student.php'; ?>
 <title>Upload Form</title>
 <script>
 document.getElementById('confirm').addEventListener('change', checkFile, false);
@@ -26,7 +26,7 @@ function checkFile(e) {
 </script>
 </head>
 <body>
-<div><a href="./student">Home</a></div>
+
 <?php echo form_open_multipart('upload/do_upload?courseid='. $courseid.'&aname='.$aname);?>
 <h1>Submit an Assignment</h1> 
 <hr>
@@ -51,5 +51,4 @@ function checkFile(e) {
 
 </form>
 
-</body>
-</html>
+<?php include './assets/template/footer_student.php'; ?>
