@@ -25,7 +25,6 @@ class Assignment_list extends CI_Controller {
 				}
 		    }
 		}
-		$data['path'] = $pathname;
 		$data['stack'] = $stack;
 		$data['msg'] = $msg;
 		$this->load->view('assignment_list_view', $data);
