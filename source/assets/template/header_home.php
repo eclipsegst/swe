@@ -11,7 +11,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <img href="" class="navbar-brand" src="./assets/img/N.jpg">
+          <a href="<?php echo base_url();?>" class="navbar-brand">Home</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -22,7 +22,7 @@
           <ul class="nav navbar-nav">
             
             <li>
-              <a href="">Home</a>
+              <!-- <a href="">Home</a> -->
             </li>
           </ul>
 

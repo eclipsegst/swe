@@ -8,14 +8,14 @@
                 <fieldset>
                   <legend>Login</legend>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Pawprint</label>
-                    <div class="col-lg-10">
+                    <label for="inputEmail" class="col-lg-3 control-label">Pawprint</label>
+                    <div class="col-lg-8">
                       <input type="text" class="form-control" id="inputEmail" name="pawprint" placeholder="Pawprint">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputPassword" class="col-lg-2 control-label" >Password</label>
-                    <div class="col-lg-10">
+                    <label for="inputPassword" class="col-lg-3 control-label" >Password</label>
+                    <div class="col-lg-8">
                       <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                       <div class="checkbox">
                         <label>
@@ -26,7 +26,7 @@
                   </div>
 
                   <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
+                    <div class="col-lg-8 col-lg-offset-3">
                       <button class="btn btn-default">Cancel</button>
                       <button type="submit" class="btn btn-primary"  value="Login">Submit</button>
                     </div>
