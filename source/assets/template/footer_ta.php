@@ -4,11 +4,11 @@
 
             <ul class="list-unstyled">
               <li class="pull-right"><a href="">Back to top</a></li>
-              <li><a href="" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
+<!--               <li><a href="" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
               <li><a href="">RSS</a></li>
-              <li><a href="">Twitter</a></li>
+              <li><a href="">Twitter</a></li> -->
             </ul>
-            <p>Made by <a href="" rel="nofollow">LEAD</a></P>
+            <!-- <p>Made by <a href="" rel="nofollow">LEAD</a></P> -->
           </div>
         </div>
 
