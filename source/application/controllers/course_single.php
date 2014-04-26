@@ -4,9 +4,9 @@ class Course_single extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
-
+		$role = $this->session->userdata('role');
+		$data['role'] = $role;
 		
-
 		$courseid = $this->input->get('courseid',true);
 	    $data['courseid'] = $courseid;
 	    $this->load->model('assignment_model');
