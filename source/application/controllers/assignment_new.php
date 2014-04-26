@@ -4,6 +4,8 @@ class Assignment_new extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
+		$role = $this->session->userdata('role');
+		$data['role'] = $role;
 		$data['msg'] = $msg;
 		$data['courseid'] = $this->input->get('courseid',true);
 
@@ -27,8 +29,13 @@ class Assignment_new extends CI_Controller {
 
         $this->load->model('assignment_model');
         $this->assignment_model->insert($data);
-
-		$msg = 'Add successully!';
-		$this->index($msg);
+        $role = $this->session->userdata('role');
+		if($role == 'professor'){
+			redirect('professor');
+		}elseif($role == 'ta'){
+			redirect('ta');
+		}elseif($role == 'admin'){
+			redirect('admin');
+		}
 	}
 }
