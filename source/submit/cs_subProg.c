@@ -5,6 +5,12 @@ int main(int argc,char **argv)
 {
 	int result = 0;
 	char subDetails[255];
+	struct curl_httppost* post = NULL;
+	struct curl_httppost* last = NULL;
+	CURL *curl;
+    CURLcode res;
+	
+	
 	if(argc != 4)
 	{
 		printf("Incorrect number of parameters.\n"
@@ -52,14 +58,74 @@ int main(int argc,char **argv)
 		return -1;
 	}
 	getPawprint();
-	printf("Submission details:\n\n");
-	printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
-	"Assignment: %s\n",userName,filename,fSize,course,section,assign);
+	//struct string s;
+    //init_string(&s);
+    
+    GenerateHashCode();
+    
+	curl_global_init(CURL_GLOBAL_ALL);
 	
-	sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
-	"Assignment: %s",userName,filename,fSize,course,section,assign);
-	makeLogEntry(subDetails);
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"file",CURLFORM_FILE,
+					 filename,CURLFORM_END);
+					 
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"submit",CURLFORM_COPYCONTENTS,
+					 "submit",CURLFORM_END);					 
+	curl = curl_easy_init();
+	if(curl)
+	{
+		//printf("hello");
+		
+	}
+	else
+	{
+		printf("init prob\n");
+		return -1;
+	}
 	
+	curl_easy_setopt(curl,CURLOPT_URL,url);
+	curl_easy_setopt(curl,CURLOPT_HTTPPOST,post);
+	//curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunc);
+    //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
+	res = curl_easy_perform(curl);
+	if(res == CURLE_OK)
+	{
+		double sizeUploaded = 0;		
+		curl_easy_getinfo(curl,CURLINFO_SIZE_UPLOAD,&sizeUploaded);
+		if((sizeUploaded-298) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-298));
+		}
+		else if((sizeUploaded-294) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-294));
+		}
+		else if((sizeUploaded-305) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-305));
+		}
+		else
+		{
+			printf("File size mismatch at server please resubmit\n");
+			return -1;
+		}
+		printf("File sending successfull\n\n");
+		//printf("%s"s->ptr);
+		printf("Submission details:\n\n");
+		printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
+				"Assignment: %s\n",userName,filename,fSize,course,section,assign);
+	
+		sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
+		"Assignment: %s",userName,filename,fSize,course,section,assign);
+		makeLogEntry(subDetails);
+		
+	}
+	else
+	{
+		printf("Error in sending file\n");
+	}
+	
+	
+	curl_easy_cleanup(curl);
 	return 0;
 }
 
@@ -99,7 +165,6 @@ void cleanup()
 	free(filename);
 	free(course);
 	free(section);
-	
 }
 
 //get pawprint by making system call
@@ -113,3 +178,69 @@ char* getPawprint()
 
 }
 
+void init_string(struct string *s)
+ {
+	s->len = 0;
+	s->ptr = malloc(s->len+1);
+	if (s->ptr == NULL) 
+	{
+		fprintf(stderr, "malloc() failed\n");
+		exit(EXIT_FAILURE);
+	}
+	s->ptr[0] = '\0';
+}
+
+size_t writeFunc(void *ptr, size_t size, size_t nmemb, struct string *s)
+{
+	size_t new_len = s->len + size*nmemb;
+	s->ptr = realloc(s->ptr, new_len+1);
+	if (s->ptr == NULL) 
+	{
+		fprintf(stderr, "realloc() failed\n");
+		exit(EXIT_FAILURE);
+	}
+	memcpy(s->ptr+s->len, ptr, size*nmemb);
+	s->ptr[new_len] = '\0';
+	s->len = new_len;
+
+	return size*nmemb;
+}
+
+void GenerateHashCode()
+{
+	EVP_MD_CTX *mdctx;
+	const EVP_MD *md;
+	
+	int md_len, i;
+	long lSize;
+	char *buffer;
+	
+	FILE *file = fopen(filename,"r");
+
+	fseek (file , 0 , SEEK_END);
+	lSize = ftell (file);
+	rewind (file);	
+	
+	buffer = (char *)malloc(sizeof(char)*lSize);
+	fread(buffer,1,lSize,file);
+	
+	OpenSSL_add_all_digests();	
+
+	md = EVP_sha256();
+
+	if(!md) 
+	{
+			printf("Unknown message digest \n");
+			exit(1);
+	}
+
+	mdctx = EVP_MD_CTX_create();
+	EVP_DigestInit_ex(mdctx, md, NULL);
+	EVP_DigestUpdate(mdctx, buffer, strlen(buffer));
+	EVP_DigestFinal_ex(mdctx, md_value, &md_len);
+	EVP_MD_CTX_destroy(mdctx);
+
+	printf("Digest is: ");
+	for(i = 0; i < md_len; i++) printf("%02x", md_value[i]);
+	printf("\n");
+}
