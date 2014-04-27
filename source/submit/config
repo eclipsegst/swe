@@ -1,2 +1,2 @@
-webservice http://babbage.cs.missouri.edu/~ar442/swe/index.php
+webservice http://localhost/swe/index.php
 webname ar442

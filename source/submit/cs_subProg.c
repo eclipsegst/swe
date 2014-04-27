@@ -58,8 +58,11 @@ int main(int argc,char **argv)
 		return -1;
 	}
 	getPawprint();
-	struct string s;
-    init_string(&s);
+	//struct string s;
+    //init_string(&s);
+    
+    GenerateHashCode();
+    
 	curl_global_init(CURL_GLOBAL_ALL);
 	
 	curl_formadd(&post,&last,CURLFORM_COPYNAME,"file",CURLFORM_FILE,
@@ -81,11 +84,30 @@ int main(int argc,char **argv)
 	
 	curl_easy_setopt(curl,CURLOPT_URL,url);
 	curl_easy_setopt(curl,CURLOPT_HTTPPOST,post);
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunc);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
+	//curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunc);
+    //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
 	res = curl_easy_perform(curl);
 	if(res == CURLE_OK)
 	{
+		double sizeUploaded = 0;		
+		curl_easy_getinfo(curl,CURLINFO_SIZE_UPLOAD,&sizeUploaded);
+		if((sizeUploaded-298) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-298));
+		}
+		else if((sizeUploaded-294) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-294));
+		}
+		else if((sizeUploaded-305) == fSize)
+		{
+			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-305));
+		}
+		else
+		{
+			printf("File size mismatch at server please resubmit\n");
+			return -1;
+		}
 		printf("File sending successfull\n\n");
 		//printf("%s"s->ptr);
 		printf("Submission details:\n\n");
@@ -182,4 +204,43 @@ size_t writeFunc(void *ptr, size_t size, size_t nmemb, struct string *s)
 	s->len = new_len;
 
 	return size*nmemb;
+}
+
+void GenerateHashCode()
+{
+	EVP_MD_CTX *mdctx;
+	const EVP_MD *md;
+	
+	int md_len, i;
+	long lSize;
+	char *buffer;
+	
+	FILE *file = fopen(filename,"r");
+
+	fseek (file , 0 , SEEK_END);
+	lSize = ftell (file);
+	rewind (file);	
+	
+	buffer = (char *)malloc(sizeof(char)*lSize);
+	fread(buffer,1,lSize,file);
+	
+	OpenSSL_add_all_digests();	
+
+	md = EVP_sha256();
+
+	if(!md) 
+	{
+			printf("Unknown message digest \n");
+			exit(1);
+	}
+
+	mdctx = EVP_MD_CTX_create();
+	EVP_DigestInit_ex(mdctx, md, NULL);
+	EVP_DigestUpdate(mdctx, buffer, strlen(buffer));
+	EVP_DigestFinal_ex(mdctx, md_value, &md_len);
+	EVP_MD_CTX_destroy(mdctx);
+
+	printf("Digest is: ");
+	for(i = 0; i < md_len; i++) printf("%02x", md_value[i]);
+	printf("\n");
 }

@@ -18,7 +18,7 @@ all: cs_subprog
 # Link the object files
 cs_subprog: cs_subProg.o verifyFile.o log.o readConf.o
 	@echo "Linking $^ to generate executable file: $@"
-	$(CC) -o $@ $^ -L/usr/lib/i386-linux-gnu -lcurl
+	$(CC) -o $@ $^ -L/usr/lib/i386-linux-gnu -lcurl -lssl -lcrypto
 
 
 #############################################
