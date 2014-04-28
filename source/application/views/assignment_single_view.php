@@ -55,12 +55,47 @@
         </div>
 </div>
 
+<<<<<<< HEAD
 <div class="bs-docs-section">
         <div class="row">
           <div class="col-lg-12">
             <div class="page-header">
               <h2 id="tables">This is a list of all submission of this assignment</h2>
             </div>
+=======
+<hr>
+<h3>This is a list of all submission of this assignment</h3>
+	
+	<table>
+		<tr>
+			<th>Pawprint</th>
+			<th>File name</th>
+			<th>Action</th>
+		</tr>
+
+		<?php 
+	foreach ($stack as $items)
+	{
+		$pieces = explode("/", $items);
+		$pawprint = $pieces[3];
+		$filename = $pieces[4];
+	?> 
+		<tr>
+			<td><?php echo $pawprint;?></td>
+			<td><?php echo $filename;?></td>
+			<td>
+				<a href="<?php echo base_url(); ?>collect/download_single?filepath=<?php echo $items; ?>&filename=<?php echo $filename; ?>">Download</a>
+				<a href="<?php echo base_url(); ?><?php echo $items; ?>">Open</a>
+			</td>
+		</tr>
+
+	<?php 
+	}
+	?>
+	</table>
+	
+		
+>>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
 
             <div>
               <table class="table table-striped table-hover ">
