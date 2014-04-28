@@ -6,6 +6,7 @@ class Login extends CI_Controller {
 	{
 		$data['msg'] = $msg;
 		$this->load->model('login_model');
+		$this->load->model('auth');
 		$query = $this->login_model->get_all_users();
 		$data['query'] = $query->result();
 		$this->load->view('login_view', $data);
@@ -13,8 +14,10 @@ class Login extends CI_Controller {
 
 	function process()
 	{
-		$this->load->model('login_model');
-		$result = $this->login_model->validate();
+		//$this->load->model('login_model');
+		//$result = $this->login_model->validate();
+		$this->load->model('auth');
+		$result = $this->auth->login();
 		if(!$result){
 			$msg = '<font color=red>Invalid username and/or password.</font><br />';
 			$this->index($msg);
