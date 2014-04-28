@@ -86,7 +86,7 @@ CREATE TABLE log (
 	log_id SERIAL PRIMARY KEY,
 	pawprint varchar(25) NOT NULL DEFAULT '',
         courseid varchar(10) NOT NULL REFERENCES Courses,
-        aid int(5) REFERENCES Assignment,
+        aid int(5) NOT NULL REFERENCES Assignment,
         sectionid char(1) NOT NULL DEFAULT '',
 	log_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	action varchar(50) NOT NULL
