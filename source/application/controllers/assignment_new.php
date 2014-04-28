@@ -4,6 +4,11 @@ class Assignment_new extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
+<<<<<<< HEAD
+=======
+		$role = $this->session->userdata('role');
+		$data['role'] = $role;
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 		$data['msg'] = $msg;
 		$data['courseid'] = $this->input->get('courseid',true);
 
@@ -27,6 +32,7 @@ class Assignment_new extends CI_Controller {
 
         $this->load->model('assignment_model');
         $this->assignment_model->insert($data);
+<<<<<<< HEAD
 
         $course_folder = "./p/" . $courseid;
         $assignment_folder = $course_folder . '/'.$aname;
@@ -49,4 +55,15 @@ class Assignment_new extends CI_Controller {
 	{
 		
 	}
+=======
+        $role = $this->session->userdata('role');
+		if($role == 'professor'){
+			redirect('professor');
+		}elseif($role == 'ta'){
+			redirect('ta');
+		}elseif($role == 'admin'){
+			redirect('admin');
+		}
+	}
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 }

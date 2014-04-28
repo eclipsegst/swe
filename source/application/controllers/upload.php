@@ -39,7 +39,8 @@ class Upload extends CI_Controller {
 
 		if($this->upload->do_upload()){
 			$data = array('upload_data' => $this->upload->data());
-			$this->load->view('upload_success', $data);
+			// $this->load->view('upload_success', $data);
+			redirect('upload_success');
 		}else{
 			$msg = "Upload failed.";
 			$this->index($msg);

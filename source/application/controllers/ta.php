@@ -14,7 +14,7 @@ class Ta extends CI_Controller {
 		    $data['pawprint'] = $pawprint;
 			$this->load->view('ta_view', $data);
 		}else{
-			redirect('login');
+			redirect('welcome');
 		}
 	}
 }

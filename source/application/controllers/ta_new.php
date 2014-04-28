@@ -4,6 +4,8 @@ class Ta_new extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
+		$role = $this->session->userdata('role');
+		$data['role'] = $role;
 		$data['msg'] = $msg;
 		$courseid = $this->input->get('courseid',true);
 		$data['courseid'] = $courseid;
@@ -19,6 +21,8 @@ class Ta_new extends CI_Controller {
 	function insert()
 	{
 		
+		$role = $this->session->userdata('role');
+		$data['role'] = $role;
 		$courseid = $_POST['courseid'];
     	$pawprint = $_POST['pawprint'];
     	$password = $_POST['password'];
