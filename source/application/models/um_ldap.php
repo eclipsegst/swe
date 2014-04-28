@@ -35,10 +35,11 @@ function is_valid_email($email) {
  Returns:
    FALSE on Error, else an array with with information.
 ****************************************************************** */
-function authenticateToUMLDAP($accountName,$credential,
-                              $ldapServer = 'ldap.missouri.edu', 
-                              $ldapPort = 3268, &$errorMsg = "", 
-                              $requireSecure = true){
+function authenticateToUMLDAP($accountName,$credential) {
+                              $ldapServer = 'ldap.missouri.edu',;
+                              $ldapPort = 3268;
+                              &$errorMsg = "";
+                              $requireSecure = true;
 
     $error           = array();
     $query_result    = array();

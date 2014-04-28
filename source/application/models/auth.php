@@ -5,8 +5,6 @@
 // LDAP Auth
 // -----------------------------------------------------------------------------
 
-// TODO: Refactor this into a model which includes the LDAP code.
-// TODO: Handle errors better and log all sign in attempts.
 
 
 class Auth extends CI_Model {
