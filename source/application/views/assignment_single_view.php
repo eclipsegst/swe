@@ -56,13 +56,6 @@
 </div>
 
 <<<<<<< HEAD
-<div class="bs-docs-section">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="page-header">
-              <h2 id="tables">This is a list of all submission of this assignment</h2>
-            </div>
-=======
 <hr>
 <h3>This is a list of all submission of this assignment</h3>
 	
@@ -95,7 +88,14 @@
 	</table>
 	
 		
->>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
+=======
+<div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="tables">This is a list of all submission of this assignment</h2>
+            </div>
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 
             <div>
               <table class="table table-striped table-hover ">

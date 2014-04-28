@@ -33,17 +33,6 @@ CREATE TABLE Courses (
 );
 
 <<<<<<< HEAD
-INSERT INTO Courses VALUES (1,'CS4320','Software Engineering I - SP2014','you can add it some'),(2,'CS4380','Database Management Systems I, Sec. 01 - SP2014','Some description'),(3,'CS4520','Operating Systems I, Sec. 01 - SP2014','description');
-
-DROP TABLE IF EXISTS Section;
-CREATE TABLE Section (
-	sid SERIAL PRIMARY KEY,
-	sectionid varchar(1) NOT NULL DEFAULT '1',
-	courseid varchar(10) NOT NULL REFERENCES Courses,
-	description varchar(250) NOT NULL DEFAULT ''
-);
-
-=======
 DROP TABLE IF EXISTS Section;
 CREATE TABLE Section (
         sid SERIAL PRIMARY KEY,
@@ -54,7 +43,18 @@ CREATE TABLE Section (
 
 INSERT INTO Courses VALUES (1,'CS4320','Software Engineering I - SP2014','you can add it some'),(2,'CS4380','Database Management Systems I, Sec. 01 - SP2014','Some description'),(3,'CS4520','Operating Systems I, Sec. 01 - SP2014','description');
 
->>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
+=======
+INSERT INTO Courses VALUES (1,'CS4320','Software Engineering I - SP2014','you can add it some'),(2,'CS4380','Database Management Systems I, Sec. 01 - SP2014','Some description'),(3,'CS4520','Operating Systems I, Sec. 01 - SP2014','description');
+
+DROP TABLE IF EXISTS Section;
+CREATE TABLE Section (
+	sid SERIAL PRIMARY KEY,
+	sectionid varchar(1) NOT NULL DEFAULT '1',
+	courseid varchar(10) NOT NULL REFERENCES Courses,
+	description varchar(250) NOT NULL DEFAULT ''
+);
+
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 DROP TABLE IF EXISTS Create_assignments;
 CREATE TABLE Create_assignments (
 	caid SERIAL PRIMARY KEY,
@@ -82,10 +82,10 @@ CREATE TABLE Users (
 );
 
 <<<<<<< HEAD
-INSERT INTO Users VALUES (14160001,'Rama Akula','Amit','ar442','5735297383',3),(14160002,'Feldmann','Jake','jsf2pc','5732917407',0),(14160003,'Archie','Jordyn','jmabp7','8163041033',0),(14160004,'Eggemeyer','Kyle','kpetg6','5738195357',1),(14160005,'Mayham','Wade','wgm343','3148733440',0),(14160006,'Zhong','Zhaolong','zztg2','5738258473',2);
-=======
 INSERT INTO `Users` VALUES (14160001,'Rama Akula','Amit','ar442','5735297383',3),(14160002,'Feldmann','Jake','jsf2pc','5732917407',0),(14160003,'Archie','Jordyn','jmabp7','8163041033',0),(14160004,'Eggemeyer','Kyle','kpetg6','5738195357',1),(14160005,'Mayham','Wade','wgm343','3148733440',0),(14160006,'Zhong','Zhaolong','zztg2','5738258473',2);
->>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
+=======
+INSERT INTO Users VALUES (14160001,'Rama Akula','Amit','ar442','5735297383',3),(14160002,'Feldmann','Jake','jsf2pc','5732917407',0),(14160003,'Archie','Jordyn','jmabp7','8163041033',0),(14160004,'Eggemeyer','Kyle','kpetg6','5738195357',1),(14160005,'Mayham','Wade','wgm343','3148733440',0),(14160006,'Zhong','Zhaolong','zztg2','5738258473',2);
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 
 DROP TABLE IF EXISTS pro_ta_course;
 CREATE TABLE pro_ta_course (
@@ -93,32 +93,32 @@ CREATE TABLE pro_ta_course (
 	courseid varchar(10) NOT NULL REFERENCES Courses,
 	pawprint varchar(25) NOT NULL DEFAULT '',
 <<<<<<< HEAD
-	uid int(5) NOT NULL REFERENCES Users
-	<--tpawprint varchar(25) NOT NULL DEFAULT ''-->
-);
-
-INSERT INTO pro_ta_course VALUES (1,'CS4320',NULL,NULL),(2,'CS4380',NULL,NULL),(3,'CS4520',NULL,NULL);
-=======
         uid int(5) NOT NULL REFERENCES Users
 	<--tpawprint varchar(25) NOT NULL DEFAULT ''-->
 );
 
 INSERT INTO `pro_ta_course` VALUES (1,'CS4320',NULL,NULL),(2,'CS4380',NULL,NULL),(3,'CS4520',NULL,NULL);
->>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
+=======
+	uid int(5) NOT NULL REFERENCES Users
+	<--tpawprint varchar(25) NOT NULL DEFAULT ''-->
+);
+
+INSERT INTO pro_ta_course VALUES (1,'CS4320',NULL,NULL),(2,'CS4380',NULL,NULL),(3,'CS4520',NULL,NULL);
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 
 DROP TABLE IF EXISTS log;
 CREATE TABLE log (
 	log_id SERIAL PRIMARY KEY,
 	pawprint varchar(25) NOT NULL DEFAULT '',
 <<<<<<< HEAD
-	courseid varchar(10) NOT NULL REFERENCES Courses,
-	aid int(5) REFERENCES Assignment,
-	sectionid char(1) NOT NULL DEFAULT '',
-=======
         courseid varchar(10) NOT NULL REFERENCES Courses,
         aid int(5) NOT NULL REFERENCES Assignment,
         sectionid char(1) NOT NULL DEFAULT '',
->>>>>>> 92d43587d0d684844e1c3516edb2ef06e4f5bc36
+=======
+	courseid varchar(10) NOT NULL REFERENCES Courses,
+	aid int(5) REFERENCES Assignment,
+	sectionid char(1) NOT NULL DEFAULT '',
+>>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 	log_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	action varchar(50) NOT NULL
 );
