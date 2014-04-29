@@ -6,29 +6,29 @@ class User_model extends CI_Model{
     }
 
     public function get_all_users(){
-        $query = $this->db->get('Users');
+        $query = $this->db->get('users');
         return $query;
     }
 
     function insert($data)
     {
-        $this->db->insert('Users',$data);
+        $this->db->insert('users',$data);
     }
 
     function select($uid)
     {
-        $query = $this->db->get_where('Users', array('uid' =>$uid));
+        $query = $this->db->get_where('users', array('uid' =>$uid));
         return $query;
     }
     function update($data,$uid)
     {
         $this->db->where('uid', $uid);
-        $this->db->update('Users', $data); 
+        $this->db->update('users', $data); 
     }
     function delete($uid)
     {
     	$this->db->where('uid',$uid);
-        $this->db->delete('Users');
+        $this->db->delete('users');
     }
 }
 ?>
