@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <h1>Update a user</h1>
 <form method="POST" action="<?php echo base_url();?>user_update/update
 	">
@@ -44,3 +45,4 @@ Role:
 </form>
 <?php echo $msg;?>
 <form action="<?php echo base_url();?>user"><input type="submit" value="Go to user list page"></form>
+<?php include './assets/template/footer.php'; ?>

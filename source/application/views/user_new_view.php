@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <h1>Add a new user</h1>
 
 <table>
@@ -28,3 +29,4 @@ Role: </td><td><input type="text" name="role" size="25">
 
 <?php echo $msg;?>
 <form action="<?php echo base_url();?>user"><input type="submit" value="Go to user page"></form>
+<?php include './assets/template/footer.php'; ?>

@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 
 <div class="bs-docs-section">
@@ -44,3 +45,4 @@
 </div>
 
 <?php include './assets/template/footer_student.php'; ?>
+<?php include './assets/template/footer.php'; ?>

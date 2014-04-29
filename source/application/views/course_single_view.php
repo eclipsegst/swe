@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php 
 	if($role == 'admin'){
 		include './assets/template/header_admin.php';
@@ -106,3 +107,5 @@
 		include './assets/template/footer.php';
 	}
  ?>
+
+ <?php include './assets/template/footer.php'; ?>
