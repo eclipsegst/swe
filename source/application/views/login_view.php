@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col-lg-4">
             <div class="well">
-              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/login/process">
+              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>login/process">
                 <fieldset>
                   <legend>Login</legend>
                   <div class="form-group">
