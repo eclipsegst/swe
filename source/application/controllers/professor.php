@@ -11,6 +11,7 @@ class Professor extends CI_Controller {
 			$this->load->model('course_model');
 			$user = $this->course_model->selectByProPawprint($pawprint);
 	    	$data['user'] = $user->result();
+		$courseid = '';
 	    	foreach ($user->result() as $row)
 			{
 			    $courseid = $row->courseid;
@@ -19,7 +20,7 @@ class Professor extends CI_Controller {
 	    	$data['ta'] = $ta->result();
 			$this->load->view('professor_view', $data);
 		}else{
-			redirect('login');
+			redirect('welcome');
 		}
 	}
 }

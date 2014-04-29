@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 
 <form action="<?php echo base_url();?>course_new"><input type="submit" value="Added a new course"></form>
 
@@ -29,3 +30,4 @@
 		?>
 	</table>
 </div>
+<?php include './assets/template/footer.php'; ?>

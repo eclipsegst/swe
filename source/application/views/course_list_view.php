@@ -1,4 +1,4 @@
-
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 <?php 
 foreach ($courses as $course)
@@ -70,3 +70,4 @@ Description:
 </div>
 
 <?php include './assets/template/footer_student.php'; ?>
+<?php include './assets/template/footer.php'; ?>

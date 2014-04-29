@@ -1,8 +1,6 @@
-<html>
-<head>
+<?php include './assets/template/header.php'; ?>
+
 <title>Upload Form</title>
-</head>
-<body>
 
 <h3>Files List</h3>
 
@@ -12,5 +10,5 @@
 <?php endforeach; ?>
 </ul>
 
-</body>
-</html>
+
+<?php include './assets/template/footer.php'; ?>

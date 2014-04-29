@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_admin.php'; ?>
 <h1> Welcome to Admin page </h1>
 <h3>Instruction</h3>
@@ -10,3 +11,4 @@
 
 </ul>
 <?php include './assets/template/footer_admin.php'; ?>
+<?php include './assets/template/footer.php'; ?>

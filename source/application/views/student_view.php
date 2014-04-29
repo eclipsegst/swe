@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 
 Welcome <?php echo $this->session->userdata('firstname');?>
@@ -55,3 +56,4 @@ Welcome <?php echo $this->session->userdata('firstname');?>
   </div>
 </div>
 <?php include './assets/template/footer_student.php'; ?>
+<?php include './assets/template/footer.php'; ?>

@@ -1,5 +1,4 @@
-<html>
-<head>
+<?php include './assets/template/header.php'; ?>
 <title>Create</title>
 <script>
 	function validateForm()
@@ -18,8 +17,8 @@
 	  	}
 	}
 </script>
-</head>
-<body>
+
+
 	<h1>Create An Assignment</h2>
 <div>
 <form method="POST" action="create/create_assignment" id="newpageform" onsubmit="return validateForm()">
@@ -43,5 +42,4 @@
 <br /><?php echo $error; ?>
 </div>
 
-</body>
-</html>
+<?php include './assets/template/footer.php'; ?>
