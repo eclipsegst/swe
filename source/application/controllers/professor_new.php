@@ -27,7 +27,9 @@ class Professor_new extends CI_Controller {
                     'pawprint'  => $pawprint
                     );
         $data2 = array(
-        			'uid'      => $uid,    
+  		    'uid'      => 'default',
+		    'firstname'=> '',
+		    'lastname' => '',    
                     'pawprint' => $pawprint,
                     'password' => $password,
                     'role'     => '2'	
