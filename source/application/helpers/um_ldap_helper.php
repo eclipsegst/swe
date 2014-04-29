@@ -77,20 +77,22 @@ function authenticateToUMLDAP($accountName,$credential) {
     }
 
     // A break above leaves $bind_status = true;
-
+	// echo "\n $bind_status";
     if ($bind_status) { 
 
         $ldapresults = ldap_search($connection, 'dc=edu', "(samaccountname=$accountName)", $attributes);
-
+	// echo "\n $ldapresults";
         if (!$ldapresults) {
       $errorMsg = "Failed to look up after bind";
+	  // echo "$errorMsg";
       return false;
         }
         else {
       // THIS VALUE IS CHECK BELOW
             $result_count = ldap_count_entries($connection, $ldapresults);
-
+			// echo "$result_count\n";
             $query_result = ldap_get_entries($connection, $ldapresults);
+			// echo "$query_result";
             ldap_close($connection);
         }
     }
@@ -103,19 +105,20 @@ function authenticateToUMLDAP($accountName,$credential) {
    return false;
     }
 
-
+$formatted_result;
     if ($result_count == 0) {
-        $formatted_result['result'] = '0';
-        $formatted_result['message'] = 'Invalid Username or Password';
+        // $formatted_result['result'] = '0';
+        // $formatted_result['message'] = 'Invalid Username or Password';
+		return FALSE;
     }
     else {
         $formatted_result['result'] = $result_count;
         $formatted_result['user']['fullname'] = $query_result[0]["displayname"][0];
         $formatted_result['user']['username'] = $query_result[0]["samaccountname"][0];
-        $formatted_result['user']['emails']   = get_email($query_result);
+        // $formatted_result['user']['emails']   = get_email($query_result);
+		 return $formatted_result;
     }
-
-    return $formatted_result;
+   
 }
 
 

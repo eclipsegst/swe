@@ -5,16 +5,19 @@ class Login extends CI_Controller {
 	public function index($msg = NULL)
 	{
 		$data['msg'] = $msg;
-		$this->load->model('login_model');
-		$query = $this->login_model->get_all_users();
-		$data['query'] = $query->result();
+		// $this->load->model('login_model');
+		// $query = $this->login_model->get_all_users();
+		// $data['query'] = $query->result();
 		$this->load->view('login_view', $data);
 	}
 
 	function process()
 	{
-		$this->load->model('login_model');
-		$result = $this->login_model->validate();
+		// $this->load->model('login_model');
+		// $result = $this->login_model->validate();
+		$this->load->model('auth');
+		$result = $this->auth->index();
+		echo $_POST['username'];
 		if(!$result){
 			$msg = '<font color=red>Invalid username and/or password.</font><br />';
 			$this->index($msg);
