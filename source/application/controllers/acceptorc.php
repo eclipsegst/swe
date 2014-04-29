@@ -64,9 +64,9 @@ class Acceptorc extends CI_Controller {
 		/************************
 		//make a log entry for the addi req
 		*******************************/
-		$query = 'insert into log (pawprint,courseid,aid,sectionid,action,hash,filename) 
+		$query = 'insert into log (pawprint,courseid,aname,sectionid,action,hash,filename) 
 		values (\'' .$user .'\',\'' .$course. '\',\'' .$assignment. '\',\'' .$section.'\',\'File Upload\',\'' .$recieved_hash.'\',\'' .$file_name.'\')' ;
-		echo $query;
+		//echo $query;
 		$this->db->query($query);
 			
 		//$isSizeOkay = check_file_size($File);
