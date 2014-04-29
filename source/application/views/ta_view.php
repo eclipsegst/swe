@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_ta.php'; ?>
 Welcome <?php echo $this->session->userdata('firstname');?></a>
 <h1> Welcome to TA page </h1>
@@ -43,3 +44,4 @@ Welcome <?php echo $this->session->userdata('firstname');?></a>
 </div>
 
 <?php include './assets/template/footer_ta.php'; ?>
+<?php include './assets/template/footer.php'; ?>

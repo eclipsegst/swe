@@ -1,4 +1,4 @@
-
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 <title>Upload Form</title>
 <script>
@@ -24,8 +24,8 @@ function checkFile(e) {
     }
 }
 </script>
-</head>
-<body>
+
+
 
 <?php echo form_open_multipart('upload/do_upload?courseid='. $courseid.'&aname='.$aname);?>
 <h1>Submit an Assignment</h1> 
@@ -52,3 +52,4 @@ function checkFile(e) {
 </form>
 
 <?php include './assets/template/footer_student.php'; ?>
+<?php include './assets/template/footer.php'; ?>

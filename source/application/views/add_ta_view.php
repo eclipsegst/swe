@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <form action="<?php echo base_url();?>add_ta"><input type="submit" value="Home"></form>
 <h1>Add a TA to a course</h1>
 <hr>
@@ -32,3 +33,4 @@ Last Name: </td><td><input type="text" name="lastname" size="25">
 </form>
 
 <?php echo $msg;?>
+<?php include './assets/template/footer.php'; ?>
