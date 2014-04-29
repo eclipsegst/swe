@@ -45,7 +45,7 @@ class Login_model extends CI_Model{
                     'validate' => true);
             }else{
                 $data=array(
-                    'role' => "admin",
+                    'role' => "student",
                     'pawprint' => $row->pawprint,
                     'firstname' => $row->firstname,
                     'validate' => true);
