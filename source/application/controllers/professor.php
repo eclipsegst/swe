@@ -19,7 +19,7 @@ class Professor extends CI_Controller {
 	    	$data['ta'] = $ta->result();
 			$this->load->view('professor_view', $data);
 		}else{
-			redirect('login');
+			redirect('welcome');
 		}
 	}
 }
