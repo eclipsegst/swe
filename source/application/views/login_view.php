@@ -37,5 +37,5 @@
           </div>
         </div>
         You can use pawprint and cellphone number to login.<br />
-        <br /> <?php if(! is_null($msg)) echo $msg;?>
+        <br /> <?php if(!empty($msg)) echo $msg;?>
 <?php include './assets/template/footer_login.php'; ?>

@@ -9,10 +9,13 @@ class Accept extends CI_Controller {
 	
 	}
 	
-	function index() {
+	function index($errorMessage=NULL) {
 	//TODO: get the file from: ['upload_path'] = './uploads/';	
 	//Initialize error message to empty string
-	$errorMessage = "";
+	
+	if!(empty($errorMessage)){
+	$this->load->view('upload_view',$data);
+	}
 	
 	//$isSizeOkay = check_file_size($File);
 	$isValidParams = check_params($course, $section, $assignment);
@@ -156,6 +159,11 @@ class Accept extends CI_Controller {
 		
 		$this->load->library('upload', $config);
 
+		$config['file_name'] = $_FILES['userfile'] . '-' . $timestamp;
+		$config['upload_path'] = $file_path;
+		$config['allowed_types'] = '*';
+		$config['max_size']	= '5242880';
+		
 		if($this->upload->do_upload()){
 			$data = array('upload_data' => $this->upload->data());
 			// $this->load->view('upload_success', $data);
