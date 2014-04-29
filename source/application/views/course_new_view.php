@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <h1>Add a new course</h1>
 
 <table>
@@ -23,3 +24,5 @@ Section: </td><td><input type="text" name="section" size="25">
 
 <?php echo $msg;?>
 <form action="<?php echo base_url();?>course"><input type="submit" value="Go to course page"></form>
+
+<?php include './assets/template/footer.php'; ?>

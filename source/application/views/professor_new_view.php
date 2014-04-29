@@ -1,4 +1,4 @@
-
+<?php include './assets/template/header.php'; ?>
 <div>
 	<table style="width:1200px">
 		<tr>
@@ -55,3 +55,4 @@ Temporary Password: </td><td><input type="text" name="password" size="25">
 </form>
 
 <?php echo $msg;?>
+<?php include './assets/template/footer.php'; ?>

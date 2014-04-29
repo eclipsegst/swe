@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_professor.php'; ?>
 
 <div class="row">
@@ -45,3 +46,4 @@
 
 
 <?php include './assets/template/footer_professor.php'; ?>
+<?php include './assets/template/footer.php'; ?>

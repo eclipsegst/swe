@@ -1,3 +1,4 @@
+<?php include './assets/template/header.php'; ?>
 <h1>Update a course</h1>
 <form method="POST" action="<?php echo base_url();?>course_update/update
 	">
@@ -39,3 +40,5 @@ Description:
 </form>
 <?php echo $msg;?>
 <form action="<?php echo base_url();?>course"><input type="submit" value="Go to course list page"></form>
+
+<?php include './assets/template/footer.php'; ?>

@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'dbhost-pgsql.cs.missouri.edu';
 $db['default']['username'] = 'cs4320s14grp14';
-$db['default']['password'] = 'zL7eIiRR';//WtWHcx2m';
+$db['default']['password'] = 'WtWHcx2m';//Tvy8.vmPx=';
 $db['default']['database'] = 'cs4320s14grp14';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
