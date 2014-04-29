@@ -105,18 +105,21 @@ class Accept extends CI_Controller {
 	$validity = 000;
 	
 	//Check course
+	$isValidCourse = !empty($this->db->get_where('courses', array('cid' =>$course)));
 		if ($isValidCourse != TRUE) {
-		$validity = $validity + 100;
+		$validity += 100;
 		}
 		
 	//Check section
+	$isValidSection = !empty($this->db->get_where('section', array('sectionid' =>$section), 'courseid' => $course));
 		if($isValidSection != TRUE) {
-		$validity = $validity + 10;
+		$validity += 10;
 		}
 		
 	//Check Assignment
+	$isValidAssn = !empty($this->db->get_where('section', array('aname' =>$assignment), 'courseid' => $course));
 		if($isValidAssn != TRUE) {
-		$validity = $validity + 1;
+		$validity += 1;
 		}
 	
 	//Check each argument against the data in the DB
