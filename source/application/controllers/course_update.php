@@ -17,13 +17,19 @@ class Course_update extends CI_Controller {
 	function update()
 	{
 
-		$uid = $this->input->get('cid',true);
-        $cid 	   = $_POST['cid'];
+		$cid = $this->input->get('cid',true);
+		$cid         = $_POST['cid'];
+        $courseid    = $_POST['courseid'];
     	$coursename  = $_POST['coursename'];
     	$description = $_POST['description'];
+<<<<<<< HEAD:Source/application/controllers/course_update.php
+
+=======
+>>>>>>> master:source/application/controllers/course_update.php
     
         $data = array(
-                    'cid'       => $cid,
+        			'cid'         => $cid,
+                    'courseid'    => $courseid,
                     'coursename'  => $coursename,
                     'description' => $description
                     );

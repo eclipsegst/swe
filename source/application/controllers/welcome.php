@@ -19,7 +19,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('index.htm');
+		$this->load->view('home_view');
 	}
 }
 
