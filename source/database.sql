@@ -4,6 +4,9 @@ CREATE SCHEMA project;
 
 SET search_path = project, public;
 
+/*
+Table that holds the adminstrators and the group is inserted for that purpose as test subjects
+*/   
 DROP TABLE IF EXISTS admin;
 CREATE TABLE admin (
 	id serial NOT NULL,
@@ -14,6 +17,9 @@ CREATE TABLE admin (
 
 INSERT INTO admin VALUES (1,'ar442','5735297383'),(2,'jsf2pc','5732917407'),(3,'jmabp7','8163041033'),(4,'kpetg6','5738195357'),(5,'wgm343','3148733440'),(6,'zztg2','5738258473');
 
+/*
+A courses table created to hold the courses and their respecitive info
+   */
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
         cid serial NOT NULL,
@@ -25,7 +31,10 @@ CREATE TABLE courses (
 
 INSERT INTO courses VALUES (1,'CS4320','Software Engineering I - SP2014','you can add it some'),(2,'CS4380','Database Management Systems I, Sec. 01 - SP2014','Some description'),(3,'CS4520','Operating Systems I, Sec. 01 - SP2014','description');
 
-
+/*
+An assignments table to hold the assignements and the assignments are linked
+to the courses and have the coresponding information that goes with assignments
+ */
 DROP TABLE IF EXISTS assignments;
 CREATE TABLE assignments (
 	aid serial NOT NULL,
@@ -38,6 +47,9 @@ CREATE TABLE assignments (
 
 INSERT INTO assignments VALUES (1,'CS4320','Homework #1',NULL,NULL),(2,'CS4320','Homework # 2','April 20','you can add it some'),(3,'CS4320','Homework #3','April 21','you can add it some'),(4,'CS4320','Homework #4','April 26','Double weighted'),(5,'CS4380','Homework #4','April 26','Double weighted'),(6,'CS4320','Homework #5','April 30','Please submit it online');
 
+/*
+   Table for each section within a course and linked to the courses with info about the section
+   */
 DROP TABLE IF EXISTS section;
 CREATE TABLE section (
 	sid serial NOT NULL,
@@ -47,6 +59,7 @@ CREATE TABLE section (
 	PRIMARY KEY (sid)
 );
 
+/*Table for creating assignments*/
 DROP TABLE IF EXISTS create_assignments;
 CREATE TABLE create_assignments (
 	caid serial NOT NULL,
@@ -56,7 +69,7 @@ CREATE TABLE create_assignments (
 );
 
 INSERT INTO create_Assignments VALUES (1,'CS4320','Homework #1');
-
+/*Table to determine who is enrolled in a class and hold that info*/
 DROP TABLE IF EXISTS enroll;
 CREATE TABLE enroll (
 	eid serial NOT NULL,
@@ -64,7 +77,7 @@ CREATE TABLE enroll (
 	courseid varchar(10) NOT NULL default '' REFERENCES courses ON DELETE CASCADE,
 	PRIMARY KEY (eid)
 );
-
+/*Table to hold the user info*/
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	uid serial NOT NULL,

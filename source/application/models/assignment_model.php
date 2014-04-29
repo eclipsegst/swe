@@ -6,24 +6,24 @@ class Assignment_model extends CI_Model{
     }
 
     public function get_all_Assignments(){
-        $query = $this->db->get('Assignments');
+        $query = $this->db->get('assignments');
         return $query;
     }
 
     function insert($data)
     {
-        $this->db->insert('Assignments',$data);
+        $this->db->insert('assignments',$data);
     }
 
     function select($aid)
     {
-        $query = $this->db->get_where('Assignments', array('aid' =>$aid));
+        $query = $this->db->get_where('assignments', array('aid' =>$aid));
         return $query;
     }
 
     function selectByName($courseid,$aname)
     {
-        $query = $this->db->get_where('Assignments', 
+        $query = $this->db->get_where('assignments', 
             array('aname' =>$aname,
                 'courseid'=>$courseid
             ));
@@ -33,7 +33,7 @@ class Assignment_model extends CI_Model{
     function update($data,$aid)
     {
         $this->db->where('aid', $aid);
-        $this->db->update('Assignments', $data); 
+        $this->db->update('assignments', $data); 
     }
     // function delete($aid)
     // {

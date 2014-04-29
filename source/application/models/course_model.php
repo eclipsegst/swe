@@ -6,36 +6,36 @@ class Course_model extends CI_Model{
     }
 
     public function get_all_Courses(){
-        $query = $this->db->get('Courses');
+        $query = $this->db->get('courses');
         return $query;
     }
 
     function insert($data)
     {
-        $this->db->insert('Courses',$data);
+        $this->db->insert('courses',$data);
     }
 
     function select($cid)
     {
-        $query = $this->db->get_where('Courses', array('cid' =>$cid));
+        $query = $this->db->get_where('courses', array('cid' =>$cid));
         return $query;
     }
 
     function selectByCourseID($courseid)
     {
-        $query = $this->db->get_where('Courses', array('courseid' =>$courseid));
+        $query = $this->db->get_where('courses', array('courseid' =>$courseid));
         return $query;
     }
     
     function update($data,$cid)
     {
         $this->db->where('cid', $cid);
-        $this->db->update('Courses', $data); 
+        $this->db->update('courses', $data); 
     }
     function delete($courseid)
     {
     	$this->db->where('courseid',$courseid);
-        $this->db->delete('Courses');
+        $this->db->delete('courses');
     }
     function insertPro($data){
         $this->db->insert('pro_course',$data);
