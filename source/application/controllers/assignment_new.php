@@ -4,11 +4,8 @@ class Assignment_new extends CI_Controller {
 
 	public function index($msg = NULL)
 	{
-<<<<<<< HEAD
-=======
 		$role = $this->session->userdata('role');
 		$data['role'] = $role;
->>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
 		$data['msg'] = $msg;
 		$data['courseid'] = $this->input->get('courseid',true);
 
@@ -32,7 +29,6 @@ class Assignment_new extends CI_Controller {
 
         $this->load->model('assignment_model');
         $this->assignment_model->insert($data);
-<<<<<<< HEAD
 
         $course_folder = "./p/" . $courseid;
         $assignment_folder = $course_folder . '/'.$aname;
@@ -43,20 +39,22 @@ class Assignment_new extends CI_Controller {
 			mkdir($assignment_folder, 0777, TRUE);	
 		}
 
-		$msg = 'Add successully!';
-		$role = $this->session->userdata('role');
-		if($role=='ta'){
-			redirect('ta');
-		}elseif($role=='professor'){
-			redirect('professor');
-		}
-	}
-	function delete()
-	{
+		$this->load->model('course_model');
+		$query = $this->course_model->get_section_by_courseid($courseid);
+
+		foreach($query->result() as $row)
+		{
+
+			$section = $assignment_folder. '/' .$row->sectionid;
+
+			if (!is_dir($section))
+			{
+				mkdir($section, 0777, TRUE);	
+			}
 		
-	}
-=======
-        $role = $this->session->userdata('role');
+		}
+		
+		$role = $this->session->userdata('role');
 		if($role == 'professor'){
 			redirect('professor');
 		}elseif($role == 'ta'){
@@ -65,5 +63,9 @@ class Assignment_new extends CI_Controller {
 			redirect('admin');
 		}
 	}
->>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7
+	function delete()
+	{
+		
+	}
+
 }

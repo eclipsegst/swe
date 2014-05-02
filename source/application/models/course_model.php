@@ -63,8 +63,19 @@ class Course_model extends CI_Model{
     }
     function get_course_by_ta_pawprint($pawprint)
     {
-        $query = $this->db->get_where('ta_course', array('pawprint' =>$pawprint));
+		$query = $this->db->get_where('ta_course', array('pawprint' =>$pawprint));
         return $query;
     }
+	function get_section_by_courseid($courseid)
+	{		
+		$query = $this->db->get_where('section', array('courseid' =>$courseid));
+		return $query;
+	}
+	function get_section_by_ta($pawprint)
+	{		
+		$pawprint = trim($pawprint);
+		$query = $this->db->get_where('ta_course', array('pawprint' =>$pawprint));
+		return $query;
+	}
 }
     
