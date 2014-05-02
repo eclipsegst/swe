@@ -22,7 +22,6 @@ class Acceptorc extends CI_Controller {
 		$recieved_hash = $this->input->post('hash');
 		$user = $this->input->post('user');
 		$file_path = './p/' . $course . '/' . $assignment . '/' . $section . '/' .$user;
-		echo $file_path;
 		if (!is_dir($file_path))
 		{
 			mkdir($file_path, 0777, TRUE);
@@ -36,144 +35,51 @@ class Acceptorc extends CI_Controller {
 
 		if($this->upload->do_upload())
 		{
-			echo "successfull";
+			//echo "successfull";
 			//$data = array('upload_data' => $this->upload->data());
 			// $this->load->view('upload_success', $data);
 			//redirect('upload_success');
+			$filedetails = $this->upload->data();
+			$file_name = $filedetails['file_name'];
+			$isSameHash = $this->check_hash($recieved_hash, $file_path . '/' . $file_name);
+		
+			if($isSameHash != TRUE) 
+			{
+				echo 'hash = ' . $isSameHash;
+				$errorMessage .= "There was an error sending the file.\nExpected:" . $recieved_hash . "\nRecieved:" . $isSameHash . "\n\n";
+				//delete file as hashes dont match
+				unlink($file_path . '/' . $file_name);
+				echo "Hash check failed". PHP_EOL;;
+				return;
+			}
+			
+			$this->load->model('course_model');
+			
+			
+			$query = 'insert into log (pawprint,courseid,aname,sectionid,action,hash,filename) 
+						values (\'' .$user .'\',\'' .$course. '\',\'' .$assignment. '\',\'' .$section.'\',\'File Upload\',\'' .$recieved_hash.'\',\'' .$file_name.'\')' ;
+	
+			$this->db->query($query);	
+			echo "File submission is successful" . PHP_EOL;
+			$hash =  hash_file( "sha256", $file_path . '/' . $file_name);
+			echo "Hash code receipt is : " . $hash . PHP_EOL;
+			echo "Submission Details" . PHP_EOL;
+			echo "\tUser : \t\t" . $user . PHP_EOL;
+			echo "\tFile name :\t" . $file_name . PHP_EOL;
+			echo "\tFile size :\t" . $filedetails['file_size']. ' KB' . PHP_EOL;
+			echo "\tCourse : \t" . $course . PHP_EOL;
+			echo "\tSection : \t" . $section . PHP_EOL;
+			echo "\tAssignment : \t" . $assignment . PHP_EOL;			
 		}
 		else
 		{
-			echo "Upload failed.";
+			echo "Upload failed." . PHP_EOL;	
 			//$this->index($msg);
 		}
 		
 		//to do: check valid params
 		
-		$filedetails = $this->upload->data();
-		$file_name = $filedetails['file_name'];
-		$isSameHash = $this->check_hash($recieved_hash, $file_path . '/' . $file_name);
 		
-		if($isSameHash != TRUE) 
-		{
-			echo 'hash = ' . $isSameHash;
-			$errorMessage .= "There was an error sending the file.\nExpected:" . $recieved_hash . "\nRecieved:" . $isSameHash . "\n\n";
-			//delete file as hashes dont match
-			unlink($file_path . '/' . $file_name);
-			return;
-		}
-		/************************
-		//make a log entry for the addi req
-		*******************************/
-		$query = 'insert into log (pawprint,courseid,aname,sectionid,action,hash,filename) 
-		values (\'' .$user .'\',\'' .$course. '\',\'' .$assignment. '\',\'' .$section.'\',\'File Upload\',\'' .$recieved_hash.'\',\'' .$file_name.'\')' ;
-		//echo $query;
-		$this->db->query($query);
-			
-		//$isSizeOkay = check_file_size($File);
-		//$isValidParams = check_params($course, $section, $assignment);
-		//$isSameHash = check_hash($recieved_hash), $file_path);
-		
-		//no need to check the file size since we do this on both front end interfaces
-			/* if($isSizeOkay == FALSE) {
-			
-			$errorMessage = $errorMessage . "The file must be less than 5MB\n";
-			} */
-			
-			
-			
-			/*if($isValidParams != 000) {
-			//Somehow figure out how to distinguish between the good vs bad params. Maybe use chmod protocol, eg 0-7
-			//Then use a switch to determine the error message
-			
-			//100 = course
-			//010 = section
-			//001 = assn
-				switch($isValidParams) {
-
-				case 001:	$errorMessage .= "Invalid assignment\n";
-					break;
-					
-				case 010:	$errorMessage .= "Invalid section\n";
-					break;
-					
-				case 011:	$errorMessage .= "Invalid section & assignment\n";
-					break;
-					
-				case 100:	$errorMessage .= "Invalid course\n";
-					break;
-					
-				case 101:	$errorMessage .= "Invalid course & assignment\n";
-					break;
-					
-				case 110:	$errorMessage .= "Invalid course & section\n";
-					break;
-					
-				case 111:	$errorMessage .= "Invalid course, section, & assignment\n";
-					break;
-				
-				
-				}
-			}
-			
-			//If everything looks good
-			if(empty($errorMessage)) {
-			
-			
-			//An error occured
-			} else {
-			$errorMessage = "\n========  ERROR ========\n\n" . $errorMessage;
-			//handle errors ->log and send message to user
-			}*/
-	
-	
-	}
-	
-	
-	//Return true if the file is within the bounds
-	//otherwise retiurn false
-	//@deprecated
-	
-/* 	function check_file_size($File) 
-	{
-	$size = filesize(File);
-	
-		if($size > 5242880) {
-		//error file too large
-		//break/ call error
-		return FALSE;
-		} else if($size == FALSE) {
-		//Could not calculate filesize
-		return FALSE;
-		}
-	return TRUE;
-	
-	 }*/
-	
-	////////////////////////////// Return TRUE if successful
-	///////////////////////////// Return FALSE if an error occured
-	// Return a 3 bit binary digit to tell which parameters were invalid
-	function check_params($course, $section, $assignment) {
-	$validity = 000;
-	
-	//Check course
-		if ($isValidCourse != TRUE) {
-		$validity = $validity + 100;
-		}
-		
-	//Check section
-		if($isValidSection != TRUE) {
-		$validity = $validity + 10;
-		}
-		
-	//Check Assignment
-		if($isValidAssn != TRUE) {
-		$validity = $validity + 1;
-		}
-	
-	//Check each argument against the data in the DB
-	//Throw any necessary errors
-	
-	return $validity;
 	}
 
 	// Compare the recieved_hash to the has that we

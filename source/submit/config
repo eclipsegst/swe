@@ -1,2 +1,3 @@
-webservice http://localhost/swe/index.php
+webservice https://babbage.cs.missouri.edu/~cs4320s14grp14/source/index.php/acceptorc
+webservice2 https://babbage.cs.missouri.edu/~cs4320s14grp14/source/index.php/getassignment
 webname ar442

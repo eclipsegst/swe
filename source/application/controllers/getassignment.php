@@ -23,7 +23,6 @@ class Getassignment extends CI_Controller {
 		//make a log entry for the addi req
 		*******************************/
 		$query = 'select * from log where courseid = \''. $course. '\' and pawprint = \''.$user .'\'';
-		echo $query;
 		$res = $this->db->query($query);
 		if($res->num_rows >0 )
 		{

@@ -10,17 +10,68 @@ int main(int argc,char **argv)
 	CURL *curl;
     CURLcode res;
 	
+	curl_global_init(CURL_GLOBAL_ALL);
 	
-	if(argc != 4)
+	if(argc == 2)
+	{
+		int course_len = 0;
+		course_len = strlen(argv[1]);
+		course = (char *)malloc((sizeof(char))*course_len);
+		
+		//copy the strings into appropriate variables	
+		strcpy(course,argv[1]);
+
+		char *paw = getPawprint();
+	
+		readConfigFile(url,webname,urlAdd);
+
+		curl_formadd(&post,&last,CURLFORM_COPYNAME,"user",CURLFORM_COPYCONTENTS,
+						 paw,CURLFORM_END);
+						 
+		curl_formadd(&post,&last,CURLFORM_COPYNAME,"course",CURLFORM_COPYCONTENTS,
+						 course,CURLFORM_END);
+		
+		curl_formadd(&post,&last,CURLFORM_COPYNAME,"submit",CURLFORM_COPYCONTENTS,
+					 "submit",CURLFORM_END);					 
+					 	
+					 			 
+		curl = curl_easy_init();
+		if(curl)
+		{
+			//printf("hello");
+			
+		}
+		else
+		{
+			printf("init prob\n");
+			return -1;
+		}
+		
+		curl_easy_setopt(curl,CURLOPT_URL,urlAdd);
+		curl_easy_setopt(curl,CURLOPT_HTTPPOST,post);
+		//curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunc);
+		//curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
+		res = curl_easy_perform(curl);
+		if(res == CURLE_OK)
+		{
+			//everything is working
+			return 0;			
+		}
+		else
+		{
+			printf("Error in tranmission\n");
+			return -1;
+		}
+		
+		
+	}
+	else if(argc != 4)
 	{
 		printf("Incorrect number of parameters.\n"
 		"Correct usage is:\n"
 		"./cs_subprog <course_section> <assignment> <filename>\n");
 		return -1;
-	}
-	
-
-	
+	}	
 
 	course_section = (char *) malloc (sizeof(char)*(strlen(argv[1])+1));
 	assign = (char *) malloc (sizeof(char)*(strlen(argv[2])+1));
@@ -32,7 +83,7 @@ int main(int argc,char **argv)
 		
 	result = validateParametersPassed();
 	
-	if(readConfigFile(url,webname) == -1)
+	if(readConfigFile(url,webname,urlAdd) == -1)
 	{
 		printf("Exiting due to error.....\n");
 		return -1;
@@ -41,8 +92,6 @@ int main(int argc,char **argv)
 	//returnUrl(url);
 	//returnWebName(webname);
 	
-	printf("\nWeb service URL = %s\n",url);
-	printf("Web username = %s\n\n",webname);
 	
 	if(result == -1)
 	{
@@ -63,13 +112,31 @@ int main(int argc,char **argv)
     
     GenerateHashCode();
     
-	curl_global_init(CURL_GLOBAL_ALL);
 	
-	curl_formadd(&post,&last,CURLFORM_COPYNAME,"file",CURLFORM_FILE,
+	
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"userfile",CURLFORM_FILE,
 					 filename,CURLFORM_END);
 					 
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"course",CURLFORM_COPYCONTENTS,
+					 course,CURLFORM_END);
+	
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"section",CURLFORM_COPYCONTENTS,
+					 section,CURLFORM_END);
+					 
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"user",CURLFORM_COPYCONTENTS,
+					userName,CURLFORM_END);
+					
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"hash",CURLFORM_COPYCONTENTS,
+					 md_value,CURLFORM_END);	
+					 
+	curl_formadd(&post,&last,CURLFORM_COPYNAME,"assignment",CURLFORM_COPYCONTENTS,
+					 assign,CURLFORM_END);						 				
+					 
 	curl_formadd(&post,&last,CURLFORM_COPYNAME,"submit",CURLFORM_COPYCONTENTS,
-					 "submit",CURLFORM_END);					 
+					 "submit",CURLFORM_END);	
+					 
+					 	
+					 			 
 	curl = curl_easy_init();
 	if(curl)
 	{
@@ -91,31 +158,14 @@ int main(int argc,char **argv)
 	{
 		double sizeUploaded = 0;		
 		curl_easy_getinfo(curl,CURLINFO_SIZE_UPLOAD,&sizeUploaded);
-		if((sizeUploaded-298) == fSize)
-		{
-			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-298));
-		}
-		else if((sizeUploaded-294) == fSize)
-		{
-			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-294));
-		}
-		else if((sizeUploaded-305) == fSize)
-		{
-			printf("File size is %d and file size on server is %.0f\n",fSize,(sizeUploaded-305));
-		}
-		else
-		{
-			printf("File size mismatch at server please resubmit\n");
-			return -1;
-		}
-		printf("File sending successfull\n\n");
+		/*printf("File sending successfull\n\n");
 		//printf("%s"s->ptr);
 		printf("Submission details:\n\n");
 		printf("Pawprint: %s\nFile name: %s\nFile size: %d bytes\nCourse: %s\nSection: %s\n"
 				"Assignment: %s\n",userName,filename,fSize,course,section,assign);
 	
 		sprintf(subDetails,"Pawprint: %s - File name: %s - File size: %d bytes - Course: %s - Section: %s - "
-		"Assignment: %s",userName,filename,fSize,course,section,assign);
+		"Assignment: %s",userName,filename,fSize,course,section,assign);*/
 		makeLogEntry(subDetails);
 		
 	}
@@ -213,7 +263,7 @@ void GenerateHashCode()
 	
 	int md_len, i;
 	long lSize;
-	char *buffer;
+	unsigned char *buffer;
 	
 	FILE *file = fopen(filename,"r");
 
@@ -240,7 +290,7 @@ void GenerateHashCode()
 	EVP_DigestFinal_ex(mdctx, md_value, &md_len);
 	EVP_MD_CTX_destroy(mdctx);
 
-	printf("Digest is: ");
+	/*printf("Digest is: ");
 	for(i = 0; i < md_len; i++) printf("%02x", md_value[i]);
-	printf("\n");
+	printf("\n");*/
 }
