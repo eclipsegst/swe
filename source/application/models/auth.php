@@ -23,49 +23,54 @@ class Auth extends CI_Model {
         $this->login();
     }
 
-    function login($errorMsg = NULL){
+    function login(){
 
         $this->session->keep_flashdata('tried_to');
         if($this->is_authenticated()) {
             // Already logged in...
-            redirect('/courses/');
+            redirect('admin');
         } else {
-
-        if(isset($_POST['username'])){
+		
+        if(isset($_POST['username']))
+		{
 
             // Set up rules for form validation
             $rules = $this->form_validation;
             $rules->set_rules('username', 'Username', 'required|alpha_dash');
             $rules->set_rules('password', 'Password', 'required');
-
+			// echo 'before if';
             // Do the login...
             if($rules->run() && $ldap_response = @authenticateToUMLDAP(
                     $rules->set_value('username'),
-                    $rules->set_value('password'))) {
-
+                    $rules->set_value('password'))) 	{
+				
                 session_start();
                 $_SESSION['logged_in'] = TRUE;
                 $_SESSION['userdata'] = ($ldap_response);
-                
                     // Login WIN!
                     if($this->session->flashdata('tried_to')) {
                         redirect($this->session->flashdata('tried_to'));
                     } else {
-                        redirect('/courses/');
+                        redirect('admin');
+						return true;
                     }
 
-                } else {
-
+             } 
+			else 
+			{
+			echo "login failed";
                     // Login FAIL
-                    $this->load->view('header');
-                    $this->load->view('auth/login_view', array('login_fail_msg'
-                    => "<b>LDAP authentication failed. </b><br />Invalid username or password."));
-                }
-            } else {
-                // Login form
-                $this->load->view('header');
-                $this->load->view('auth/login_view');
+                    // $this->load->view('header');
+                   // $this->load->view('login_view', $msg = "<b>LDAP authentication failed. </b><br />Invalid username or password."));
             }
+         } 
+		 else 
+		 {
+		 echo "login failed";
+                // Login form
+                //$this->load->view('header');
+               // $this->load->view('auth/login_view');
+         }
         }
     }
 

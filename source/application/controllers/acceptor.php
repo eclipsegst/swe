@@ -9,10 +9,13 @@ class Accept extends CI_Controller {
 	
 	}
 	
-	function index() {
+	function index($errorMessage=NULL) {
 	//TODO: get the file from: ['upload_path'] = './uploads/';	
 	//Initialize error message to empty string
-	$errorMessage = "";
+	
+	if!(empty($errorMessage)){
+	$this->load->view('upload_view',$data);
+	}
 	
 	//$isSizeOkay = check_file_size($File);
 	$isValidParams = check_params($course, $section, $assignment);
@@ -64,12 +67,13 @@ class Accept extends CI_Controller {
 		
 		//If everything looks good
 		if(empty($errorMessage)) {
-		
+		$this->store_file();
 		
 		//An error occured
 		} else {
 		$errorMessage = "\n========  ERROR ========\n\n" . $errorMessage;
 		//handle errors ->log and send message to user
+		$this->index($errorMessage);
 		}
 	
 	
@@ -79,7 +83,7 @@ class Accept extends CI_Controller {
 	//Return true if the file is within the bounds
 	//otherwise retiurn false
 	//@deprecated
-/* 	function check_file_size($File) 
+	function check_file_size($File) 
 	{
 	$size = filesize(File);
 	
@@ -93,27 +97,29 @@ class Accept extends CI_Controller {
 		}
 	return TRUE;
 	
-	 }*/
+	 }
 	
-	////////////////////////////// Return TRUE if successful
-	///////////////////////////// Return FALSE if an error occured
+
 	// Return a 3 bit binary digit to tell which parameters were invalid
 	function check_params($course, $section, $assignment) {
 	$validity = 000;
 	
 	//Check course
+	$isValidCourse = !empty($this->db->get_where('courses', array('cid' =>$course)));
 		if ($isValidCourse != TRUE) {
-		$validity = $validity + 100;
+		$validity += 100;
 		}
 		
 	//Check section
+	$isValidSection = !empty($this->db->get_where('section', array('sectionid' =>$section), 'courseid' => $course));
 		if($isValidSection != TRUE) {
-		$validity = $validity + 10;
+		$validity += 10;
 		}
 		
 	//Check Assignment
+	$isValidAssn = !empty($this->db->get_where('section', array('aname' =>$assignment), 'courseid' => $course));
 		if($isValidAssn != TRUE) {
-		$validity = $validity + 1;
+		$validity += 1;
 		}
 	
 	//Check each argument against the data in the DB
@@ -131,11 +137,13 @@ class Accept extends CI_Controller {
 	// return TRUE
 	function check_hash($recieved_hash, $file_path) {
 	$hash = hash_file( "sha256", $file_path);
+	if(!empty($recieved_hash){
 		if($hash == $received_hash) {
 			return  TRUE;
 			} else {
 				return $hash;
 			}
+		} return TRUE;
 	
 	}
 	
@@ -143,12 +151,35 @@ class Accept extends CI_Controller {
 		$timestamp = time();
 		
 		// IF /course/assignment/section/$pawprint !exists, create the directory
+		$courseid = $_GET['courseid'];
+		$aname = $_GET['aname'];
+		$pawprint = $this->session->userdata('pawprint');
 		
-		if(move_uploaded_file ($_FILES[file_up][tmp_name], $file_name.$timestamp)){
-			echo "Congratulations, file succesfully uploaded";
-		} else {
-			echo "Failed to upload file";
-			}
+		$file_path = '/p/'. $_GET['courseid']  . '/' . $_GET['aname'] . '/' . $_GET['sectionid']  . $pawprint; 
+		if (!is_dir($file_path)){
+			mkdir($file_path, 0755, TRUE);	
+		}
+		
+		$this->load->library('upload', $config);
+
+		$config['file_name'] = $_FILES['userfile'] . '-' . $timestamp;
+		$config['upload_path'] = $file_path;
+		$config['allowed_types'] = '*';
+		$config['max_size']	= '5242880';
+		
+		if($this->upload->do_upload()){
+			$data = array('upload_data' => $this->upload->data());
+			// $this->load->view('upload_success', $data);
+			redirect('upload_success');
+		}else{
+			$msg = "Upload failed.";
+			$this->index($msg);
+		}
+		// if(move_uploaded_file ($_FILES[file_up][tmp_name], $file_name.$timestamp)){
+			// echo "Congratulations, file succesfully uploaded";
+		// } else {
+			// echo "Failed to upload file";
+			// }
 	}
 
 
