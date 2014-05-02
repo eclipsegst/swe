@@ -9,8 +9,10 @@ class Ta extends CI_Controller {
 		if($role=='ta' || $role=='admin'){
 			$data['msg'] = $msg;
 		    $this->load->model('course_model');
+			$pawprint = trim($pawprint);
 		    $query = $this->course_model->get_course_by_ta_pawprint($pawprint);
-		    $data['query'] = $query->result();
+			$row = $query->row();
+			$data['query'] = $query->result();
 		    $data['pawprint'] = $pawprint;
 			$this->load->view('ta_view', $data);
 		}else{
@@ -18,3 +20,4 @@ class Ta extends CI_Controller {
 		}
 	}
 }
+?>

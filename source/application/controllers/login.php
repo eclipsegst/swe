@@ -13,10 +13,10 @@ class Login extends CI_Controller {
 
 	function process()
 	{
-		// $this->load->model('login_model');
-		// $result = $this->login_model->validate();
-		$this->load->model('auth');
-		$result = $this->auth->index();
+		$this->load->model('login_model');
+		$result = $this->login_model->validate();
+		//$this->load->model('auth');
+		//$result = $this->auth->index();
 		echo $_POST['username'];
 		if(!$result){
 			$msg = '<font color=red>Invalid username and/or password.</font><br />';

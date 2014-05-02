@@ -10,7 +10,7 @@
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label">Pawprint</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" id="inputEmail" name="username" placeholder="Pawprint">
+                      <input type="text" class="form-control" id="inputEmail" name="pawprint" placeholder="Pawprint">
                     </div>
                   </div>
                   <div class="form-group">

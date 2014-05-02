@@ -22,7 +22,7 @@ class Login_model extends CI_Model{
             if($row->role == 0){
                 $data=array(
                     'role' => "student",
-                    'pawprint' => $row->pawprint,
+                    'pawprint' => trim($row->pawprint),
                     'firstname' => $row->firstname,
                     'validate' => true);
             }elseif ($row->role == 1) {
