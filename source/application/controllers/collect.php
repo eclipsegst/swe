@@ -28,14 +28,25 @@ class Collect extends CI_Controller {
 		$this->load->library('zip');
 	    $courseid = $this->input->get('courseid',true);
 		$aname = $this->input->get('aname',true);
+		$role = $this->session->userdata('role');
 		$pawprint = $this->session->userdata('pawprint');
-		$this->load->model('course_model');
-		$section = $this->course_model->get_section_by_ta($pawprint);
-		$row = $section->row();
-	    $path = './p/'. $courseid .'/'. $aname .'/'. $row->section. '/';
 		
-	    $this->zip->read_dir($path,FALSE);  
-	    $result = $this->zip->download($courseid.'_'.$aname.'.zip'); 
+		if($role == 'professor'){
+			$path = './p/'. $courseid .'/'. $aname .'/';
+	    	$this->zip->read_dir($path,FALSE);  
+	    	$result = $this->zip->download($courseid.'_'.$aname.'_'.'.zip'); 
+		}elseif($role == 'ta'){
+			$this->load->model('course_model');
+			$sections = $this->course_model->get_section_by_ta($pawprint);
+			foreach ($sections->result() as $row)
+			{
+			    $section = $row->sectionid;
+			}
+		    $path = './p/'. $courseid .'/'. $aname .'/'. $section. '/';
+		    $this->zip->read_dir($path,FALSE);  
+		    $result = $this->zip->download($courseid.'_'.$aname.'_'.$section.'.zip');
+		}
+ 
 	}
 }
 

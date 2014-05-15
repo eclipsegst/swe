@@ -19,7 +19,7 @@
                       <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox"> 
+                          <input type="checkbox"> Remember me 
                         </label>
                       </div>
                     </div>
@@ -36,6 +36,5 @@
             <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
           </div>
         </div>
-        You can use pawprint and cellphone number to login.<br />
         <br /> <?php if(!empty($msg)) echo $msg;?>
 <?php include './assets/template/footer_login.php'; ?>

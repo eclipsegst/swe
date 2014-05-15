@@ -31,6 +31,24 @@ class Acceptorc extends CI_Controller {
 		$config['max_size']= '5242880';
 		$config['min_size']= '1';
 		
+		$queryForCourseAndAssign = 'select * from assignments where courseid=\''.$course.'\' and aname = \''.$assignment.'\'';
+		
+		$resultOfCheck = $this->db->query($queryForCourseAndAssign);	
+		if($resultOfCheck->num_rows !== 1)
+		{
+			echo "Invalid course or assignment name" . PHP_EOL;
+			return;
+		}
+		
+		$queryForCourseAndAssign = 'select * from section where courseid=\''.$course.'\' and sectionid = \''.$section.'\'';
+		
+		$resultOfCheck = $this->db->query($queryForCourseAndAssign);	
+		if($resultOfCheck->num_rows !== 1)
+		{
+			echo "Invalid section name" . PHP_EOL;
+			return;
+		}
+		
 		$this->load->library('upload', $config);
 
 		if($this->upload->do_upload())

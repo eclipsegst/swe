@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_admin.php'; ?>
 <div class="bs-docs-section">
         <div class="row">
@@ -65,4 +64,3 @@
 </div>
 
 <?php include './assets/template/footer_admin.php'; ?>
-<?php include './assets/template/footer.php'; ?>

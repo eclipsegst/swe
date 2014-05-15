@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 
 <div class="bs-docs-section">
@@ -16,7 +15,8 @@
 				 	<th>Assingment ID</th>
 				 	<th>Assignment Name</th>
 				    <th>Due date</th>
-				    <th>Description</th>   
+				    <th>Description</th>
+				    <th>Point</th>    
                   </tr>
                 </thead>
                 <tbody>
@@ -30,6 +30,7 @@
 					<td><?php echo $assignment->aname; ?></td>
 		      		<td><?php echo $assignment->duedate; ?></td>
 		      		<td><?php echo $assignment->description; ?></td>
+		      		<td><?php echo $assignment->point; ?></td>
 					<td>
 					<a href="<?php echo base_url(); ?>upload?courseid=<?php echo $assignment->courseid; ?>&aname=<?php echo $assignment->aname; ?>">Submit an assignment</a>
 					</td>
@@ -45,4 +46,3 @@
 </div>
 
 <?php include './assets/template/footer_student.php'; ?>
-<?php include './assets/template/footer.php'; ?>

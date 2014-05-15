@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-<h1>Add a new assignment</h1>
-
-<table>
-<form method="POST" action="<?php echo base_url();?>assignment_new/insert">
-<tr><td>
-Course ID: </td><td><input type="text" name="courseid" size="25" value = "<?php echo $courseid;?>">
-</td></tr>
-<tr><td>
-Assignment Name: </td><td><input type="text" name="aname" size="25">
-</td></tr>
-<tr><td>
-Due Date: </td><td><input type="text" name="duedate" size="25">
-</td></tr>
-<tr><td>
-Description: </td><td><input type="text" name="description" size="25">
-</td></tr>
-<tr><td>
-
-<input type="submit" value="submit">
-</tr></td>
-</table>
-</form>
-
-<?php echo $msg;?>
-<form action="<?php echo base_url();?>assignment"><input type="submit" value="Go to assignment page"></form>
-=======
 <?php 
 	if($role == 'admin'){
 		include './assets/template/header_admin.php';
@@ -51,19 +24,25 @@ Description: </td><td><input type="text" name="description" size="25">
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label" >Assignment Name:</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="aname" name="aname">
+                      <input type="text" class="form-control" id="aname" name="aname" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label" >Due Date:</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="duedate" name="duedate">
+                      <input type="text" class="form-control" id="duedate" name="duedate" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label" >Description: </label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="description" name="description">
+                      <input type="text" class="form-control" id="description" name="description" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="point" class="col-lg-3 control-label" >Point: </label>
+                    <div class="col-lg-9">
+                      <input type="text" class="form-control" id="point" name="point" required>
                     </div>
                   </div>
 
@@ -92,4 +71,3 @@ Description: </td><td><input type="text" name="description" size="25">
 		include './assets/template/footer.php';
 	}
  ?>
->>>>>>> dc86e7766f5c029cf6f747de1ceb3c6f451587d7

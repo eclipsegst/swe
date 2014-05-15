@@ -9,6 +9,10 @@ class Course_model extends CI_Model{
         $query = $this->db->get('courses');
         return $query;
     }
+    function enroll($data)
+    {
+        $this->db->insert('enroll',$data);
+    }
 
     function insert($data)
     {
@@ -18,6 +22,11 @@ class Course_model extends CI_Model{
     function select($cid)
     {
         $query = $this->db->get_where('courses', array('cid' =>$cid));
+        return $query;
+    }
+    function select_course_by_pawprint($pawprint)
+    {
+        $query = $this->db->get_where('enroll', array('pawprint' =>$pawprint));
         return $query;
     }
 
@@ -58,7 +67,14 @@ class Course_model extends CI_Model{
     }
 
     function get_ta_by_courseid($courseid){
-        $query = $this->db->get_where('ta_course', array('courseid' =>$courseid));
+        // $this->db->distinct('pawprint');
+        // $this->db->group_by("pawprint");
+        // $this->db->get('table');
+        // $query = $this->db->get_where('ta_course', array('courseid' =>$courseid));
+
+        $sql = "select distinct(pawprint) from  ta_course where courseid =".$this->db->escape($courseid);
+
+        $query = $this->db->query($sql);
         return $query;
     }
     function get_course_by_ta_pawprint($pawprint)

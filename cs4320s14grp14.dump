@@ -1,0 +1,1544 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: project; Type: SCHEMA; Schema: -; Owner: cs4320s14grp14
+--
+
+CREATE SCHEMA project;
+
+
+ALTER SCHEMA project OWNER TO cs4320s14grp14;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = project, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: admin; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE admin (
+    id integer NOT NULL,
+    pawprint character varying(25) NOT NULL,
+    password character varying(20) NOT NULL
+);
+
+
+ALTER TABLE project.admin OWNER TO cs4320s14grp14;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE admin_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.admin_id_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE admin_id_seq OWNED BY admin.id;
+
+
+--
+-- Name: assignments; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE assignments (
+    aid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aname character varying(50) DEFAULT ''::character varying NOT NULL,
+    duedate character varying(50) DEFAULT NULL::character varying,
+    description character varying(250) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE project.assignments OWNER TO cs4320s14grp14;
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE assignments_aid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.assignments_aid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE assignments_aid_seq OWNED BY assignments.aid;
+
+
+--
+-- Name: courses; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE courses (
+    cid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    coursename character varying(50) DEFAULT ''::character varying NOT NULL,
+    description character varying(250) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE project.courses OWNER TO cs4320s14grp14;
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE courses_cid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.courses_cid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE courses_cid_seq OWNED BY courses.cid;
+
+
+--
+-- Name: create_assignments; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE create_assignments (
+    caid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aname character varying(50) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE project.create_assignments OWNER TO cs4320s14grp14;
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE create_assignments_caid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.create_assignments_caid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE create_assignments_caid_seq OWNED BY create_assignments.caid;
+
+
+--
+-- Name: enroll; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE enroll (
+    eid integer NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE project.enroll OWNER TO cs4320s14grp14;
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE enroll_eid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.enroll_eid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE enroll_eid_seq OWNED BY enroll.eid;
+
+
+--
+-- Name: log; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE log (
+    log_id integer NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aid integer DEFAULT 0 NOT NULL,
+    sectionid character(1) DEFAULT ''::bpchar NOT NULL,
+    log_date timestamp without time zone DEFAULT now() NOT NULL,
+    action character varying(50) DEFAULT NULL::character varying,
+    hash character(64) DEFAULT NULL::bpchar,
+    filename text
+);
+
+
+ALTER TABLE project.log OWNER TO cs4320s14grp14;
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE log_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.log_log_id_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE log_log_id_seq OWNED BY log.log_id;
+
+
+--
+-- Name: pro_ta_course; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE pro_ta_course (
+    ptc integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    uid integer NOT NULL
+);
+
+
+ALTER TABLE project.pro_ta_course OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE pro_ta_course_ptc_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.pro_ta_course_ptc_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE pro_ta_course_ptc_seq OWNED BY pro_ta_course.ptc;
+
+
+--
+-- Name: section; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE section (
+    sid integer NOT NULL,
+    sectionid character varying(1) DEFAULT '1'::character varying NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    description character varying(250) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE project.section OWNER TO cs4320s14grp14;
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE section_sid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.section_sid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE section_sid_seq OWNED BY section.sid;
+
+
+--
+-- Name: users; Type: TABLE; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE users (
+    uid integer NOT NULL,
+    lastname character varying(20) DEFAULT ''::character varying NOT NULL,
+    firstname character varying(20) DEFAULT ''::character varying NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    password character varying(20) DEFAULT ''::character varying NOT NULL,
+    role integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE project.users OWNER TO cs4320s14grp14;
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE; Schema: project; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE users_uid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project.users_uid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE OWNED BY; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE users_uid_seq OWNED BY users.uid;
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: admin; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE admin (
+    id integer NOT NULL,
+    pawprint character varying(25) NOT NULL,
+    password character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.admin OWNER TO cs4320s14grp14;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE admin_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.admin_id_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE admin_id_seq OWNED BY admin.id;
+
+
+--
+-- Name: assignments; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE assignments (
+    aid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aname character varying(50) DEFAULT ''::character varying NOT NULL,
+    duedate character varying(50) DEFAULT NULL::character varying,
+    description character varying(250) DEFAULT NULL::character varying,
+    point integer
+);
+
+
+ALTER TABLE public.assignments OWNER TO cs4320s14grp14;
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE assignments_aid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.assignments_aid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE assignments_aid_seq OWNED BY assignments.aid;
+
+
+--
+-- Name: courses; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE courses (
+    cid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    coursename character varying(50) DEFAULT ''::character varying NOT NULL,
+    description character varying(250) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.courses OWNER TO cs4320s14grp14;
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE courses_cid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.courses_cid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE courses_cid_seq OWNED BY courses.cid;
+
+
+--
+-- Name: create_assignments; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE create_assignments (
+    caid integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aname character varying(50) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE public.create_assignments OWNER TO cs4320s14grp14;
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE create_assignments_caid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.create_assignments_caid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE create_assignments_caid_seq OWNED BY create_assignments.caid;
+
+
+--
+-- Name: enroll; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE enroll (
+    eid integer NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE public.enroll OWNER TO cs4320s14grp14;
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE enroll_eid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.enroll_eid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE enroll_eid_seq OWNED BY enroll.eid;
+
+
+--
+-- Name: log; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE log (
+    log_id integer NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    aname character varying(50) DEFAULT NULL::character varying,
+    sectionid character(1) DEFAULT ''::bpchar NOT NULL,
+    log_date timestamp without time zone DEFAULT now() NOT NULL,
+    action character varying(50) DEFAULT NULL::character varying,
+    hash character(64) DEFAULT NULL::bpchar,
+    filename text
+);
+
+
+ALTER TABLE public.log OWNER TO cs4320s14grp14;
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE log_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.log_log_id_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE log_log_id_seq OWNED BY log.log_id;
+
+
+--
+-- Name: pro_course; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE pro_course (
+    pcid integer NOT NULL,
+    courseid character varying(10),
+    pawprint character varying(20)
+);
+
+
+ALTER TABLE public.pro_course OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_course_pcid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE pro_course_pcid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pro_course_pcid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_course_pcid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE pro_course_pcid_seq OWNED BY pro_course.pcid;
+
+
+--
+-- Name: pro_ta_course; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE pro_ta_course (
+    ptc integer NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    pawprint character varying(25) DEFAULT ''::character varying NOT NULL,
+    uid integer NOT NULL
+);
+
+
+ALTER TABLE public.pro_ta_course OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE pro_ta_course_ptc_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pro_ta_course_ptc_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE pro_ta_course_ptc_seq OWNED BY pro_ta_course.ptc;
+
+
+--
+-- Name: section; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE section (
+    sid integer NOT NULL,
+    sectionid character(1) DEFAULT '1'::bpchar NOT NULL,
+    courseid character varying(10) DEFAULT ''::character varying NOT NULL,
+    description character varying(250) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.section OWNER TO cs4320s14grp14;
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE section_sid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.section_sid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE section_sid_seq OWNED BY section.sid;
+
+
+--
+-- Name: ta_course; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE ta_course (
+    tcid integer NOT NULL,
+    courseid character varying(10),
+    pawprint character varying(25),
+    sectionid character(1)
+);
+
+
+ALTER TABLE public.ta_course OWNER TO cs4320s14grp14;
+
+--
+-- Name: ta_course_tcid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE ta_course_tcid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ta_course_tcid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: ta_course_tcid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE ta_course_tcid_seq OWNED BY ta_course.tcid;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+CREATE TABLE users (
+    uid integer NOT NULL,
+    lastname character varying(20),
+    firstname character varying(20),
+    pawprint character varying(20),
+    password character varying(50),
+    role integer
+);
+
+
+ALTER TABLE public.users OWNER TO cs4320s14grp14;
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE; Schema: public; Owner: cs4320s14grp14
+--
+
+CREATE SEQUENCE users_uid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_uid_seq OWNER TO cs4320s14grp14;
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER SEQUENCE users_uid_seq OWNED BY users.uid;
+
+
+SET search_path = project, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY admin ALTER COLUMN id SET DEFAULT nextval('admin_id_seq'::regclass);
+
+
+--
+-- Name: aid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY assignments ALTER COLUMN aid SET DEFAULT nextval('assignments_aid_seq'::regclass);
+
+
+--
+-- Name: cid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY courses ALTER COLUMN cid SET DEFAULT nextval('courses_cid_seq'::regclass);
+
+
+--
+-- Name: caid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY create_assignments ALTER COLUMN caid SET DEFAULT nextval('create_assignments_caid_seq'::regclass);
+
+
+--
+-- Name: eid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY enroll ALTER COLUMN eid SET DEFAULT nextval('enroll_eid_seq'::regclass);
+
+
+--
+-- Name: log_id; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY log ALTER COLUMN log_id SET DEFAULT nextval('log_log_id_seq'::regclass);
+
+
+--
+-- Name: ptc; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY pro_ta_course ALTER COLUMN ptc SET DEFAULT nextval('pro_ta_course_ptc_seq'::regclass);
+
+
+--
+-- Name: sid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY section ALTER COLUMN sid SET DEFAULT nextval('section_sid_seq'::regclass);
+
+
+--
+-- Name: uid; Type: DEFAULT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::regclass);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY admin ALTER COLUMN id SET DEFAULT nextval('admin_id_seq'::regclass);
+
+
+--
+-- Name: aid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY assignments ALTER COLUMN aid SET DEFAULT nextval('assignments_aid_seq'::regclass);
+
+
+--
+-- Name: cid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY courses ALTER COLUMN cid SET DEFAULT nextval('courses_cid_seq'::regclass);
+
+
+--
+-- Name: caid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY create_assignments ALTER COLUMN caid SET DEFAULT nextval('create_assignments_caid_seq'::regclass);
+
+
+--
+-- Name: eid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY enroll ALTER COLUMN eid SET DEFAULT nextval('enroll_eid_seq'::regclass);
+
+
+--
+-- Name: log_id; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY log ALTER COLUMN log_id SET DEFAULT nextval('log_log_id_seq'::regclass);
+
+
+--
+-- Name: pcid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY pro_course ALTER COLUMN pcid SET DEFAULT nextval('pro_course_pcid_seq'::regclass);
+
+
+--
+-- Name: ptc; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY pro_ta_course ALTER COLUMN ptc SET DEFAULT nextval('pro_ta_course_ptc_seq'::regclass);
+
+
+--
+-- Name: sid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY section ALTER COLUMN sid SET DEFAULT nextval('section_sid_seq'::regclass);
+
+
+--
+-- Name: tcid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY ta_course ALTER COLUMN tcid SET DEFAULT nextval('ta_course_tcid_seq'::regclass);
+
+
+--
+-- Name: uid; Type: DEFAULT; Schema: public; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::regclass);
+
+
+SET search_path = project, pg_catalog;
+
+--
+-- Data for Name: admin; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY admin (id, pawprint, password) FROM stdin;
+1	ar442	5735297383
+2	jsf2pc	5732917407
+3	jmabp7	8163041033
+4	kpetg6	5738195357
+5	wgm343	3148733440
+6	zztg2	5738258473
+\.
+
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('admin_id_seq', 1, false);
+
+
+--
+-- Data for Name: assignments; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY assignments (aid, courseid, aname, duedate, description) FROM stdin;
+1	CS4320	Homework #1	\N	\N
+2	CS4320	Homework # 2	April 20	you can add it some
+3	CS4320	Homework #3	April 21	you can add it some
+4	CS4320	Homework #4	April 26	Double weighted
+5	CS4380	Homework #4	April 26	Double weighted
+6	CS4320	Homework #5	April 30	Please submit it online
+\.
+
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('assignments_aid_seq', 1, false);
+
+
+--
+-- Data for Name: courses; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY courses (cid, courseid, coursename, description) FROM stdin;
+1	CS4320	Software Engineering I - SP2014	you can add it some
+2	CS4380	Database Management Systems I, Sec. 01 - SP2014	Some description
+3	CS4520	Operating Systems I, Sec. 01 - SP2014	description
+\.
+
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('courses_cid_seq', 1, false);
+
+
+--
+-- Data for Name: create_assignments; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY create_assignments (caid, courseid, aname) FROM stdin;
+1	CS4320	Homework #1
+\.
+
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('create_assignments_caid_seq', 1, false);
+
+
+--
+-- Data for Name: enroll; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY enroll (eid, pawprint, courseid) FROM stdin;
+\.
+
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('enroll_eid_seq', 1, false);
+
+
+--
+-- Data for Name: log; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY log (log_id, pawprint, courseid, aid, sectionid, log_date, action, hash, filename) FROM stdin;
+\.
+
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('log_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: pro_ta_course; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY pro_ta_course (ptc, courseid, pawprint, uid) FROM stdin;
+1	CS4320		14160001
+2	CS4380		14160001
+3	CS4520		14160001
+\.
+
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('pro_ta_course_ptc_seq', 1, false);
+
+
+--
+-- Data for Name: section; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY section (sid, sectionid, courseid, description) FROM stdin;
+\.
+
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('section_sid_seq', 1, false);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: project; Owner: cs4320s14grp14
+--
+
+COPY users (uid, lastname, firstname, pawprint, password, role) FROM stdin;
+14160001	Rama Akula	Amit	ar442	5735297383	3
+14160002	Feldmann	Jake	jsf2pc	5732917407	0
+14160003	Archie	Jordyn	jmabp7	8163041033	0
+14160004	Eggemeyer	Kyle	kpetg6	5738195357	1
+14160005	Mayham	Wade	wgm343	3148733440	0
+14160006	Zhong	Zhaolong	zztg2	5738258473	2
+\.
+
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE SET; Schema: project; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('users_uid_seq', 1, false);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY admin (id, pawprint, password) FROM stdin;
+1	ar442	5735297383
+2	jsf2pc	5732917407
+3	jmabp7	8163041033
+4	kpetg6	5738195357
+5	wgm343	3148733440
+6	zztg2	5738258473
+\.
+
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('admin_id_seq', 1, false);
+
+
+--
+-- Data for Name: assignments; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY assignments (aid, courseid, aname, duedate, description, point) FROM stdin;
+5	CS4320	hw45	April 20		\N
+23	CS4320	HW1	May 20th 2016	Double weighted	100
+27	CS4320	homework15	05-10-2014	homework	10
+28	CS4320	Homework16	05-10-2014	homework	50
+\.
+
+
+--
+-- Name: assignments_aid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('assignments_aid_seq', 28, true);
+
+
+--
+-- Data for Name: courses; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY courses (cid, courseid, coursename, description) FROM stdin;
+11	CS4320	Software Engineering I	This course is about software engineering.
+12	CS4380	Database Management Systems I	This course is about database management.
+13	CS4520	Operating Systems I	This course is about operating system.
+\.
+
+
+--
+-- Name: courses_cid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('courses_cid_seq', 13, true);
+
+
+--
+-- Data for Name: create_assignments; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY create_assignments (caid, courseid, aname) FROM stdin;
+1	CS4320	Homework #1
+\.
+
+
+--
+-- Name: create_assignments_caid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('create_assignments_caid_seq', 1, false);
+
+
+--
+-- Data for Name: enroll; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY enroll (eid, pawprint, courseid) FROM stdin;
+1	zztg2	CS4320
+2	zztg2	CS4380
+\.
+
+
+--
+-- Name: enroll_eid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('enroll_eid_seq', 2, true);
+
+
+--
+-- Data for Name: log; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY log (log_id, pawprint, courseid, aname, sectionid, log_date, action, hash, filename) FROM stdin;
+1				 	2014-05-01 19:38:20.425667	File Upload	                                                                	
+2	ar442	CS4320	lab5	1	2014-05-01 19:44:24.929288	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+3	ar442	CS4320	lab5	1	2014-05-01 20:26:12.236517	File Upload	%/\t:Vc,6hM\tt;                                                   	verifyFile.c
+4	ar442	CS4320	lab5	1	2014-05-01 20:31:25.353388	File Upload	%/\t:Vc,6hM\tt;                                                   	verifyFile1.c
+5	ar442	CS4320	lb10	1	2014-05-02 00:28:45.249816	File Upload	%/\t:Vc,6hM\tt;                                                   	verifyFile.c
+6	cs4320s14grp14	CS4320	lb10	1	2014-05-02 00:46:48.473927	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+7	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:06:24.64258	File Upload	rXje_Z0w[$*tq                                                   	readConf.c
+8	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:11:36.204699	File Upload	rXje_Z0w[$*tq                                                   	readConf1.c
+9	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:24:12.806139	File Upload	rXje_Z0w[$*tq                                                   	readConf2.c
+10	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:25:20.543222	File Upload	rXje_Z0w[$*tq                                                   	readConf3.c
+11	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:25:42.488253	File Upload	rXje_Z0w[$*tq                                                   	readConf4.c
+12	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:26:03.412557	File Upload	rXje_Z0w[$*tq                                                   	readConf5.c
+13	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:28:13.327451	File Upload	^eeVdG{Ȧq6dؓ5+Q                                                 	verifyFile.c
+14	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:32:30.237099	File Upload	^eeVdG{Ȧq6dؓ5+Q                                                 	verifyFile1.c
+15	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:36:08.330744	File Upload	^eeVdG{Ȧq6dؓ5+Q                                                 	verifyFile2.c
+16	cs4320s14grp14	CS4320	lb10	1	2014-05-02 01:36:45.936113	File Upload	^eeVdG{Ȧq6dؓ5+Q                                                 	verifyFile3.c
+17	cs4320s14grp14	CS4320	lab5	1	2014-05-05 22:06:24.493192	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+18	cs4320s14grp14	CS4320	lab5	1	2014-05-05 23:45:13.605727	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header1.h
+19	cs4320s14grp14	CS4320	homework12	1	2014-05-08 11:20:36.504663	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+20	cs4320s14grp14	CS4320	homework12	2	2014-05-08 11:42:10.716005	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+21	cs4320s14grp14	CS4320	homework13	1	2014-05-08 12:16:28.113826	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+22	cs4320s14grp14	CS4320	Homework13	1	2014-05-08 12:18:29.51546	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+23	cs4320s14grp14	CS4320	homework14	1	2014-05-08 12:40:17.888353	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+24	cs4320s14grp14	CS4320	homework15	1	2014-05-08 12:41:37.078135	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+25	cs4320s14grp14	CS4320	homework15	1	2014-05-08 12:44:30.825337	File Upload	Gf)uQsEE$վMb֥jG                                                 	as6.c
+26	cs4320s14grp14	CS4320	Homework16	1	2014-05-08 14:05:44.406117	File Upload	Gf)uQsEE$վMb֥jG                                                 	as6.c
+27	cs4320s14grp14	CS4320	homework16	1	2014-05-10 20:43:51.381288	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+28	cs4320s14grp14	CS4320	homework15	2	2014-05-10 21:37:02.078622	File Upload	.,xVL\tVƴϨ~"560                                                  	sub_header.h
+29	zztg2	CS4320	homework15	1	2014-05-10 22:59:44.362965	File Upload	\N	
+30	zztg2	CS4320	homework15	1	2014-05-10 23:01:13.985154	File Upload	\N	sub_header.h
+31	zztg2	CS4320	homework15	1	2014-05-10 23:01:31.161808	File Upload	\N	sub_header1.h
+32	zztg2	CS4320	homework15	1	2014-05-10 23:02:12.334714	File Upload	\N	sub_header2.h
+33	zztg2	CS4320	homework15	1	2014-05-10 23:03:22.355769	File Upload	\N	sub_header3.h
+34	zztg2	CS4320	homework15	1	2014-05-10 23:05:01.881703	File Upload	\N	sub_header4.h
+35	zztg2	CS4320	homework15	1	2014-05-10 23:05:11.593419	File Upload	\N	sub_header5.h
+\.
+
+
+--
+-- Name: log_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('log_log_id_seq', 35, true);
+
+
+--
+-- Data for Name: pro_course; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY pro_course (pcid, courseid, pawprint) FROM stdin;
+1	CS4320	professor1
+2	CS4380	professor2
+3	CS4520	professor3
+\.
+
+
+--
+-- Name: pro_course_pcid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('pro_course_pcid_seq', 3, true);
+
+
+--
+-- Data for Name: pro_ta_course; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY pro_ta_course (ptc, courseid, pawprint, uid) FROM stdin;
+2	CS4380		14160001
+3	CS4520		14160001
+1	CS4320	ta11	14160001
+\.
+
+
+--
+-- Name: pro_ta_course_ptc_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('pro_ta_course_ptc_seq', 1, false);
+
+
+--
+-- Data for Name: section; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY section (sid, sectionid, courseid, description) FROM stdin;
+7	1	CS4320	Section 1
+9	2	CS4320	Section 2
+10	3	CS4320	Section 3
+\.
+
+
+--
+-- Name: section_sid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('section_sid_seq', 11, true);
+
+
+--
+-- Data for Name: ta_course; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY ta_course (tcid, courseid, pawprint, sectionid) FROM stdin;
+10	CS4320	ta11	1
+22	CS4320	ta12	2
+24	CS4320	ta13	3
+25	CS4320	jsf2pc	\N
+26	CS4320	ta13	4
+27	CS4320	jsf2pc	1
+\.
+
+
+--
+-- Name: ta_course_tcid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('ta_course_tcid_seq', 27, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: cs4320s14grp14
+--
+
+COPY users (uid, lastname, firstname, pawprint, password, role) FROM stdin;
+3			professor2	professor2	2
+4			professor3	professor3	2
+1	Admin	Admin	admin	admin	3
+2			professor1	professor1	2
+5	\N	\N	ta11	ta11	1
+10	stduent1	stduent1	stduent1	stduent1	0
+11	Zhong	Zhaolong	zztg2	zztg2	0
+12	\N	\N	ta12	ta12	1
+15	\N	\N	jsf2pc	123456	1
+13	Feldmann	Jake	TA13	TA13	1
+\.
+
+
+--
+-- Name: users_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: cs4320s14grp14
+--
+
+SELECT pg_catalog.setval('users_uid_seq', 15, true);
+
+
+SET search_path = project, pg_catalog;
+
+--
+-- Name: admin_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY admin
+    ADD CONSTRAINT admin_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: assignments_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY assignments
+    ADD CONSTRAINT assignments_pkey PRIMARY KEY (aid);
+
+
+--
+-- Name: courses_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY courses
+    ADD CONSTRAINT courses_pkey PRIMARY KEY (courseid);
+
+
+--
+-- Name: create_assignments_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY create_assignments
+    ADD CONSTRAINT create_assignments_pkey PRIMARY KEY (caid);
+
+
+--
+-- Name: enroll_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY enroll
+    ADD CONSTRAINT enroll_pkey PRIMARY KEY (eid);
+
+
+--
+-- Name: log_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_pkey PRIMARY KEY (log_id);
+
+
+--
+-- Name: pro_ta_course_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY pro_ta_course
+    ADD CONSTRAINT pro_ta_course_pkey PRIMARY KEY (ptc);
+
+
+--
+-- Name: section_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_pkey PRIMARY KEY (sid);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: project; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (uid);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: admin_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY admin
+    ADD CONSTRAINT admin_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY assignments
+    ADD CONSTRAINT assignments_pkey PRIMARY KEY (aid);
+
+
+--
+-- Name: courses_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY courses
+    ADD CONSTRAINT courses_pkey PRIMARY KEY (courseid);
+
+
+--
+-- Name: create_assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY create_assignments
+    ADD CONSTRAINT create_assignments_pkey PRIMARY KEY (caid);
+
+
+--
+-- Name: enroll_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY enroll
+    ADD CONSTRAINT enroll_pkey PRIMARY KEY (eid);
+
+
+--
+-- Name: log_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_pkey PRIMARY KEY (log_id);
+
+
+--
+-- Name: pro_course_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY pro_course
+    ADD CONSTRAINT pro_course_pkey PRIMARY KEY (pcid);
+
+
+--
+-- Name: pro_ta_course_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY pro_ta_course
+    ADD CONSTRAINT pro_ta_course_pkey PRIMARY KEY (ptc);
+
+
+--
+-- Name: section_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_pkey PRIMARY KEY (sectionid, courseid);
+
+
+--
+-- Name: ta_course_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY ta_course
+    ADD CONSTRAINT ta_course_pkey PRIMARY KEY (tcid);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: cs4320s14grp14; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (uid);
+
+
+SET search_path = project, pg_catalog;
+
+--
+-- Name: assignments_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY assignments
+    ADD CONSTRAINT assignments_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: create_assignments_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY create_assignments
+    ADD CONSTRAINT create_assignments_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: enroll_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY enroll
+    ADD CONSTRAINT enroll_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: log_aid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_aid_fkey FOREIGN KEY (aid) REFERENCES assignments(aid) ON DELETE CASCADE;
+
+
+--
+-- Name: log_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: pro_ta_course_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY pro_ta_course
+    ADD CONSTRAINT pro_ta_course_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: pro_ta_course_uid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY pro_ta_course
+    ADD CONSTRAINT pro_ta_course_uid_fkey FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE;
+
+
+--
+-- Name: section_courseid_fkey; Type: FK CONSTRAINT; Schema: project; Owner: cs4320s14grp14
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_courseid_fkey FOREIGN KEY (courseid) REFERENCES courses(courseid) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

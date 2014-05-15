@@ -19,12 +19,14 @@ class Assignment_new extends CI_Controller {
     	$aname  = $_POST['aname'];
     	$duedate  = $_POST['duedate'];
     	$description = $_POST['description'];
+    	$point = $_POST['point'];
 	
         $data = array(
                     'courseid'     => $courseid,
                     'aname'  => $aname,
                     'duedate'  => $duedate,
                     'description' => $description,
+                    'point' => $point
                     );
 
         $this->load->model('assignment_model');

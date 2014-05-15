@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_professor.php'; ?>
 
 <div class="row">
@@ -11,12 +10,6 @@
             <label for="inputEmail" class="col-lg-3 control-label">Course ID:</label>
             <div class="col-lg-9">
               <input type="text" class="form-control" id="courseid" name="courseid" value = "<?php echo $courseid;?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputPassword" class="col-lg-3 control-label" >TA ID:</label>
-            <div class="col-lg-9">
-              <input type="text" class="form-control" id="uid" name="uid">
             </div>
           </div>
           <div class="form-group">
@@ -46,4 +39,3 @@
 
 
 <?php include './assets/template/footer_professor.php'; ?>
-<?php include './assets/template/footer.php'; ?>

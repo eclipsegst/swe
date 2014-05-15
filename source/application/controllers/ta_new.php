@@ -26,14 +26,12 @@ class Ta_new extends CI_Controller {
 		$courseid = $_POST['courseid'];
     	$pawprint = $_POST['pawprint'];
     	$password = $_POST['password'];
-    	$uid	  = $_POST['uid'];
 			
         $data1 = array(
                     'courseid'  => $courseid,
                     'pawprint'  => $pawprint
                     );
-        $data2 = array(
-        			'uid'      => $uid,    
+        $data2 = array(  
                     'pawprint' => $pawprint,
                     'password' => $password,
                     'role'     => '1'	

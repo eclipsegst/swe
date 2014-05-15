@@ -1,14 +1,7 @@
-<?php include './assets/template/header.php'; ?>
 <?php 
-	if($role == 'admin'){
-		include './assets/template/header_admin.php';
-	}elseif($role == 'professor'){
-		include './assets/template/header_professor.php';
-	}elseif($role == 'ta'){
+
 		include './assets/template/header_ta.php';
-	}else{
-		include './assets/template/header.php';
-	}
+
  ?>
 <h1>Welcome to <?php echo $courseid; ?></h1>
 
@@ -49,12 +42,15 @@
 </div>
 
 
+
+
 <div class="bs-docs-section">
         <div class="row">
           <div class="col-lg-12">
             <div class="page-header">
               <h1 id="tables">Assignments</h1>
             </div>
+			<a href="<?php echo base_url(); ?>assignment_new?courseid=<?php echo $course->courseid; ?>">Add an assignment</a><br/>
 
             <div>
               <table class="table table-striped table-hover ">
@@ -66,6 +62,8 @@
 				 	<th>Assignment Name</th>
 				    <th>Due date</th>
 				    <th>Description</th> 
+				    <th>Point</th> 
+				    <th>Action</th> 
                   </tr>
                 </thead>
                 <tbody>
@@ -81,7 +79,9 @@
 					<td><?php echo $assignment->aname; ?></td>
 		      		<td><?php echo $assignment->duedate; ?></td>
 		      		<td><?php echo $assignment->description; ?></td>
-					<td>
+		      		<td><?php echo $assignment->point; ?></td>
+
+					<td><a href="<?php echo base_url(); ?>course_single/delete?courseid=<?php echo $assignment->courseid; ?>&aname=<?php echo $assignment->aname; ?>">Delete</a>
 					</td>
 				<tr>
 				<?php }
@@ -107,5 +107,3 @@
 		include './assets/template/footer.php';
 	}
  ?>
-
- <?php include './assets/template/footer.php'; ?>

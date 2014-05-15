@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 
 <div class="bs-docs-section">
@@ -22,12 +21,14 @@
                 <tbody>
                 <?php 
 				foreach ($stack as $items)
-				{
+				{	
 					$pieces = explode("/", $items);
+					if(count($pieces)>=3){
 					$courseid = $pieces[2];
 					$aname = $pieces[3];
-					$pawprint = $pieces[4];
-					$filename = $pieces[5];
+					$pawprint = $pieces[count($pieces)-2];
+					$filename = $pieces[count($pieces)-1];
+					if($thispawprint == $pawprint){
 				?> 
 				<tr>
 					<td><?php echo $pawprint;?></td>
@@ -39,7 +40,7 @@
 						<a href="<?php echo base_url(); ?><?php echo $items; ?>">Open</a>
 					</td>
 				</tr>
-				<?php 
+					<?php } }
 				}
 				?>
                 </tbody>
@@ -49,4 +50,3 @@
         </div>
 </div>
 <?php include './assets/template/footer_student.php'; ?>
-<?php include './assets/template/footer.php'; ?>

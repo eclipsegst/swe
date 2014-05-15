@@ -12,10 +12,13 @@ class Upload extends CI_Controller {
 	{
 		$data =$msg;
 		$courseid = $_GET['courseid'];
-		$aname = $_GET['aname'];
+		$data['aname'] = $_GET['aname'];
 
-		$data['aname'] = $aname;
-		$data['courseid'] = $courseid;
+		$this->load->model('assignment_model');
+        $query = $this->assignment_model->select_section($courseid);
+        $data['query'] = $query->result();$data['courseid'] = $courseid;
+
+
 		$this->load->view('upload_view',$data);
 	}
 
@@ -23,8 +26,17 @@ class Upload extends CI_Controller {
 	{
 		$courseid = $_GET['courseid'];
 		$aname = $_GET['aname'];
+		if (isset($_POST["sectionid"]) && !empty($_POST["sectionid"])) {
+		    $sectionid = $_POST["sectionid"];    
+		}
 		$pawprint = $this->session->userdata('pawprint');
-		$assignment_path = './p/'.$courseid.'/'.$aname.'/'.$pawprint;
+		
+		if(!empty($sectionid)){
+			$assignment_path = './p/'.$courseid.'/'.$aname.'/'. $sectionid.'/'.$pawprint;
+		}else{
+			$assignment_path = './p/'.$courseid.'/'.$aname.'/'.$pawprint;
+		}
+
 		if (!is_dir($assignment_path)){
 			mkdir($assignment_path, 0777, TRUE);	
 		}
@@ -40,6 +52,13 @@ class Upload extends CI_Controller {
 		if($this->upload->do_upload()){
 			$data = array('upload_data' => $this->upload->data());
 			// $this->load->view('upload_success', $data);
+			$filedetails = $this->upload->data();
+			$file_name = $filedetails['file_name'];
+			
+			$query = 'insert into log (pawprint,courseid,aname,sectionid,action,filename) 
+						values (\'' .$pawprint .'\',\'' .$courseid. '\',\'' .$aname. '\',\'' .$sectionid.'\',\'File Upload\',\'' .$file_name.'\')' ;
+
+			$this->db->query($query);	
 			redirect('upload_success');
 		}else{
 			$msg = "Upload failed.";

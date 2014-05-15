@@ -3,7 +3,7 @@
           <div class="col-lg-12">
 
             <ul class="list-unstyled">
-              <li class="pull-right"><a href="">Back to top</a></li>
+              <!-- <li class="pull-right"><a href="">Back to top</a></li> -->
               <li><a href=""></a></li>
             </ul>
 <!--             <p>Made by <a href="" rel="nofollow"></a></P> -->

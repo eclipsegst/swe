@@ -17,7 +17,6 @@ class Login extends CI_Controller {
 		$result = $this->login_model->validate();
 		//$this->load->model('auth');
 		//$result = $this->auth->index();
-		echo $_POST['username'];
 		if(!$result){
 			$msg = '<font color=red>Invalid username and/or password.</font><br />';
 			$this->index($msg);

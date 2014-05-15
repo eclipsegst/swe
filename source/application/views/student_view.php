@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 
 Welcome <?php echo $this->session->userdata('firstname');?>
@@ -29,6 +28,10 @@ Welcome <?php echo $this->session->userdata('firstname');?>
                   <?php 
                   foreach ($query as $course)
                   {
+                    foreach ($registered as $item)
+                    {
+                      if($course->courseid == $item->courseid)
+                      {
                   ?>
                   <tr>
                     <td><?php echo $course->courseid; ?></td>
@@ -38,7 +41,8 @@ Welcome <?php echo $this->session->userdata('firstname');?>
                     <a href="<?php echo base_url(); ?>assignment?courseid=<?php echo $course->courseid; ?>">Check out assignment</a>
                     </td>
                   <tr>
-                  <?php
+                  <?php }
+                    }
                   }
                   ?>
                 </tbody>
@@ -46,6 +50,13 @@ Welcome <?php echo $this->session->userdata('firstname');?>
             </div><!-- /example -->
           </div>
         </div>
+</div>
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-12">
+    <a href="<?php echo base_url(); ?>student_enroll">Register a course</a>
+  </div>
+  </div>
 </div>
 
 <div class="bs-docs-section">
@@ -56,4 +67,3 @@ Welcome <?php echo $this->session->userdata('firstname');?>
   </div>
 </div>
 <?php include './assets/template/footer_student.php'; ?>
-<?php include './assets/template/footer.php'; ?>

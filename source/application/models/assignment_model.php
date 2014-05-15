@@ -20,6 +20,11 @@ class Assignment_model extends CI_Model{
         $query = $this->db->get_where('assignments', array('aid' =>$aid));
         return $query;
     }
+    function select_course_by_courseid_from_enroll($courseid)
+    {
+        $query = $this->db->get_where('enroll', array('courseid' =>$courseid));
+        return $query;
+    }
 
     function selectByName($courseid,$aname)
     {
@@ -28,6 +33,37 @@ class Assignment_model extends CI_Model{
                 'courseid'=>$courseid
             ));
         return $query;
+    }
+    function insert_section($data){
+        $this->db->insert('section',$data);
+    }
+    function select_section($courseid){;
+        $query = $this->db->get_where('section', array('courseid' =>$courseid));
+        return $query;
+    }
+    function add_ta_to_section($data){
+        $this->db->insert('ta_course',$data);
+    }
+    function get_ta_by_courseid($courseid)
+    {
+        $query = $this->db->get_where('ta_course', array('courseid' =>$courseid));
+        return $query;
+    }
+    function delete_ta_from_section($data)
+    {
+        $this->db->delete('ta_course', $data); 
+    }
+    function delete_ta_from_course($data)
+    {
+        $this->db->delete('ta_course', $data); 
+    }
+    function delete_section($data)
+    {
+        $this->db->delete('section', $data); 
+    }
+    function delete_assignment($data)
+    {
+        $this->db->delete('assignments', $data); 
     }
 
     function update($data,$aid)

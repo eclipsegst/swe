@@ -1,4 +1,4 @@
-<?php include './assets/template/header.php'; ?>
+<?php include './assets/template/header_admin.php'; ?>
 <title>Create</title>
 <script>
 	function validateForm()
@@ -42,4 +42,4 @@
 <br /><?php echo $error; ?>
 </div>
 
-<?php include './assets/template/footer.php'; ?>
+<?php include './assets/template/footer_admin.php'; ?>

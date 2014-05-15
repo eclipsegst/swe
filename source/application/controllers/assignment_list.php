@@ -14,7 +14,8 @@ class Assignment_list extends CI_Controller {
 		{
 		    $courseid = $row->courseid;
 		    $aname = $row->aname;
-			$path = "./p/" . $courseid . '/'. $aname . '/' . $pawprint;
+			// $path = "./p/" . $courseid . '/'. $aname . '/' . $pawprint;
+			$path = "./p/";
 		    if (is_dir($path))
 		    {
 		    	$fileinfos = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
@@ -25,6 +26,7 @@ class Assignment_list extends CI_Controller {
 				}
 		    }
 		}
+		$data['thispawprint'] = $pawprint;
 		$data['stack'] = $stack;
 		$data['msg'] = $msg;
 		$this->load->view('assignment_list_view', $data);

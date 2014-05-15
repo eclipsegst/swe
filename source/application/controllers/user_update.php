@@ -16,11 +16,13 @@ class User_update extends CI_Controller {
 	function update()
 	{
 
-		$uid = $this->input->get('uid',true);
+		// $uid_old = $this->input->get('uid',true);
+        // $uid_old = 261;
         $uid 	   = $_POST['uid'];
     	$lastname  = $_POST['lastname'];
     	$firstname = $_POST['firstname'];
     	$pawprint  = $_POST['pawprint'];
+        $password  = $_POST['password'];
     	$role      = $_POST['role'];
     
         $data = array(
@@ -28,6 +30,7 @@ class User_update extends CI_Controller {
                     'lastname'  => $lastname,
                     'firstname' => $firstname,
                     'pawprint'  => $pawprint,
+                    'password'  => $password,
                     'role'      => $role
                     );
 

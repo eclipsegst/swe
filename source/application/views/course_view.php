@@ -1,17 +1,25 @@
-<?php include './assets/template/header.php'; ?>
+<?php include './assets/template/header_admin.php'; ?>
 
-<form action="<?php echo base_url();?>course_new"><input type="submit" value="Added a new course"></form>
 
-<div>
-	<table style="width:1200px">
-		<tr>
-		 	<th>cid</th>
-		 	<th>courseid</th>
-		    <th>coursename</th>
-		    <th>description</th>    
-		    
-		</tr>
-		<?php 
+<div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="tables">List of Courses</h2>
+            </div>
+
+            <div>
+              <table class="table table-striped table-hover ">
+                <thead>
+                  <tr>
+                    <th>CID</th>
+				 	<th>Course ID</th>
+				    <th>Course Name</th>
+				    <th>Description</th>  
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
 		foreach ($query as $course)
 		{
 		?>
@@ -28,6 +36,23 @@
 		<?php
 		}
 		?>
-	</table>
+                </tbody>
+              </table> 
+            </div><!-- /example -->
+          </div>
+        </div>
+      </div>
+
+
+		<div class="row">
+          <div class="col-lg-12">
+			<form action="<?php echo base_url();?>course_new">
+				<button type="button" class="btn btn-default"  onClick="window.location='<?php echo base_url();?>course_new';">Added a new course</button>
+			</form>
+		   </div>
+		</div>
+
 </div>
-<?php include './assets/template/footer.php'; ?>
+
+
+<?php include './assets/template/footer_admin.php'; ?>

@@ -24,11 +24,7 @@ Course Name:
 
 Description: 
 </td><td><input type="text" value="<?php echo $course->description; ?>" name="description" size="25">
-<<<<<<< HEAD:Source/application/views/course_update_view.php
 </td></tr>
-=======
-</td></tr
->>>>>>> master:source/application/views/course_update_view.php
 		<?php
 		}
 		?>

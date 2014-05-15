@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./assets/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="./assets/css/bootswatch.min.css">
-    
+    <!-- <script type="text/javascript" src="http://static.zephyrcharts.com/bs_caro/jquery-1.9.1.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    -->
+         <?php      if(!isset($_SERVER['HTTPS'])) {
+                  $redir = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                  header("Location: $redir");
+                }
+        ?>
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top">

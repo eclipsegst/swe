@@ -1,8 +1,5 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_ta.php'; ?>
 Welcome <?php echo $this->session->userdata('firstname');?></a>
-<h1> Welcome to TA page </h1>
-
 
 <div class="bs-docs-section">
         <div class="row">
@@ -16,7 +13,7 @@ Welcome <?php echo $this->session->userdata('firstname');?></a>
                 <thead>
                   <tr>
                     <th>Course ID</th>
-				 	<th>TA Pawprint</th>
+				 	          <th>TA Pawprint</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -24,6 +21,7 @@ Welcome <?php echo $this->session->userdata('firstname');?></a>
                 <?php 
 				foreach ($query as $course)
 				{
+          if(!empty($course->sectionid)){
 				?>
 				<tr>
 					<td><?php echo $course->courseid; ?></td>
@@ -33,7 +31,7 @@ Welcome <?php echo $this->session->userdata('firstname');?></a>
 					<a href="<?php echo base_url(); ?>assignment_new?courseid=<?php echo $course->courseid; ?>">Add an assignment</a>
 					</td>
 				<tr>
-				<?php
+				<?php }
 				}
 				?>
                 </tbody>
@@ -44,4 +42,3 @@ Welcome <?php echo $this->session->userdata('firstname');?></a>
 </div>
 
 <?php include './assets/template/footer_ta.php'; ?>
-<?php include './assets/template/footer.php'; ?>

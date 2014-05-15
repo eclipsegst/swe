@@ -30,6 +30,6 @@ class Course_new extends CI_Controller {
 		}
 
 		$msg = 'Add successully!';
-		$this->index($msg);
+		redirect('course');
 	}
 }

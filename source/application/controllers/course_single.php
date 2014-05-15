@@ -20,6 +20,28 @@ class Course_single extends CI_Controller {
 		$this->load->view('course_single_view', $data);
 	}
 
+	function delete()
+	{
+		$aname     = $this->input->get('aname',true);	
+		$courseid  = $this->input->get('courseid',true);	
+        $data = array(
+                    'aname' => $aname
+                    );
+
+        $this->load->model('assignment_model');
+        $this->assignment_model->delete_assignment($data);
+
+        $dir = 'p/'. $courseid.'/'.$aname;
+	    foreach(glob($dir . '/*') as $file) {
+	        if(is_dir($file))
+	            rrmdir($file);
+	        else
+	            unlink($file);
+	    }
+	    rmdir($dir);
+
+		redirect('course_single?courseid='.$courseid);
+	}
 	// function update()
 	// {
 

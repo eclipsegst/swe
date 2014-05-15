@@ -10,7 +10,7 @@ class User_new extends CI_Controller {
 
 	function insert()
 	{
-		$uid 	   = $_POST['uid'];
+		// $uid 	   = $_POST['uid'];
     	$lastname  = $_POST['lastname'];
     	$firstname = $_POST['firstname'];
     	$pawprint  = $_POST['pawprint'];
@@ -18,7 +18,7 @@ class User_new extends CI_Controller {
     	$role 	   = $_POST['role'];
 			
         $data = array(
-                    'uid'      => $uid,
+                    // 'uid'      => $uid,
                     'lastname' => $lastname,
                     'firstname'=> $firstname,
                     'pawprint' =>$pawprint,
@@ -30,6 +30,6 @@ class User_new extends CI_Controller {
         $this->user_model->insert($data);
 
 		$msg = 'Add successully!';
-		$this->index($msg);
+		redirect('user');
 	}
 }

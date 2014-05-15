@@ -1,7 +1,5 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_professor.php'; ?>
 Welcome <?php echo $this->session->userdata('firstname');?>
-<h1> Welcome to Profeesor page </h1>
 
 <div class="bs-docs-section">
         <div class="row">
@@ -29,7 +27,7 @@ Welcome <?php echo $this->session->userdata('firstname');?>
 					<td><?php echo $course->courseid; ?></td>
 		      		<td><?php echo $course->pawprint; ?></td>
 					<td>
-					<a href="<?php echo base_url(); ?>assignment_new?courseid=<?php echo $course->courseid; ?>">Add an assignment</a><br/>
+					<a href="<?php echo base_url(); ?>section_list?courseid=<?php echo $course->courseid; ?>">Course Section</a><br/>
 					<a href="<?php echo base_url(); ?>course_single?courseid=<?php echo $course->courseid; ?>">List of Assignments</a><br/>
 					<a href="<?php echo base_url(); ?>ta_new?courseid=<?php echo $course->courseid; ?>">Add a TA</a><br/>
 				</td>
@@ -43,6 +41,8 @@ Welcome <?php echo $this->session->userdata('firstname');?>
           </div>
         </div>
 </div>
+
+
 
 <div class="bs-docs-section">
         <div class="row">
@@ -70,12 +70,12 @@ Welcome <?php echo $this->session->userdata('firstname');?>
 					
 				?>
 				<tr>
-					<td><?php echo $item->courseid; ?></td>
+					<td><?php echo $courseid; ?></td>
 		      		<td><?php echo $item->pawprint; ?></td>
 		      		<td></td>
 		      		<td></td>
 		      		<td></td>
-		      		<td><a href="">Delete</a></td>
+		      		<td><a href="<?php echo base_url();?>professor/delete_ta?courseid=<?php echo $courseid;?>&pawprint=<?php echo $item->pawprint;?>">Delete TA</a></td>
 				<tr>
 				<?php 
 				}
@@ -87,5 +87,5 @@ Welcome <?php echo $this->session->userdata('firstname');?>
         </div>
 </div>
 
+
 <?php include './assets/template/footer_professor.php'; ?>
-<?php include './assets/template/footer.php'; ?>

@@ -1,4 +1,3 @@
-<?php include './assets/template/header.php'; ?>
 <?php include './assets/template/header_student.php'; ?>
 <title>Upload Form</title>
 <script>
@@ -31,16 +30,27 @@ function checkFile(e) {
 <h1>Submit an Assignment</h1> 
 <hr>
 <div>
-    <h3>1. Assignment Information</h3>
-    Name:<br />
-    Due Date: </br>
-    Points Possible: </br>
-</div>
+
 <div>
-    <h3>2. Assignment Submission</h3>
-    Attach File: <input type="file" name="userfile" size="20" id="confirm" value="Browse My Computer" />
+    <h3>1. Assignment Submission</h3>
+    <input type="file" name="userfile" size="20" id="confirm" value="Browse My Computer" />
 
 </div>
+
+<div>
+    <h3>2. Choose section</h3>
+<select name="sectionid" id="sectionid">
+    <option value="" disabled="disabled" selected="selected">Please select a section</option>
+    <?php foreach ($query as $section)
+        {
+            echo '<option value="'.$section->sectionid.'">'.$section->description.'</option>';
+
+        }
+    ?>
+
+</select>
+</div>
+
 <div>
     <h3>3. Add Comments</h3>
         <textarea rows="10" cols="70" name="description" form="newpageform" placeholder="Enter content here..."></textarea>
@@ -52,4 +62,3 @@ function checkFile(e) {
 </form>
 
 <?php include './assets/template/footer_student.php'; ?>
-<?php include './assets/template/footer.php'; ?>

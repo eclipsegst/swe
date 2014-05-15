@@ -27,22 +27,21 @@ class Getassignment extends CI_Controller {
 		if($res->num_rows >0 )
 		{
 			echo PHP_EOL .'Request by User : '.$user. PHP_EOL;
-			echo 'Course : '. $course;
+			echo 'Course : '. $course . PHP_EOL;;
 			$secPrinted = 0;
+			$section = "";
 			foreach($res->result() as $row)
 			{				
-				if($secPrinted == 0)
-				{
-					echo " Section : ".$row->sectionid. PHP_EOL ;
-					$secPrinted = 1;
-				}
+
+				echo "\tSection : ".$row->sectionid. PHP_EOL ;
 				echo "\tAssignment : ".$row->aname. PHP_EOL;
-				echo "\tFile submitted : ". $row->filename . PHP_EOL .PHP_EOL;
+				echo "\tFile submitted : ". $row->filename . PHP_EOL ;
+				echo "\tTime stamp: ". $row->log_date . PHP_EOL . PHP_EOL;
 			}
 		}
 		else
 		{
-			echo 'Invalid course selection or no files submitted\n';
+			echo 'Invalid course selection or no files submitted'  . PHP_EOL;
 		}	
 		//$isSizeOkay = check_file_size($File);
 		//$isValidParams = check_params($course, $section, $assignment);
